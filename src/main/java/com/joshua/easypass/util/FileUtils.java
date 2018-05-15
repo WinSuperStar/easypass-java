@@ -44,10 +44,13 @@ public class FileUtils {
             }
             bos.close();
             stream.close();
-            result.setCode(RESULT_SUCESS);
+            
             uploadResult.setRelativeStorePath(mergeFilePath(FileUtils.getUploadType(fileName),moduleName,fileName));
+            result.setCode(RESULT_SUCESS);
+            result.setData(uploadResult);
 		} catch(IOException e) {
 			result.setCode(RESULT_ERROR);
+			result.setMsg(e.getMessage());
 		} finally {
             try{
                 bos.close();
