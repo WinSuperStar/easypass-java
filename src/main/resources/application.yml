@@ -1,0 +1,33 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mydb?useSSL=false
+    username: root
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+upload:
+  open: true
+  base-dir: /data/files/
+  max-file-size: 2MB
+  max-request-size: 10MB
+  default-domain: "http://images.user.xxx.com"
+  module-types:
+  - name: "user"
+    file-path: "user"
+    upload-types:
+    - name: "images"
+      store-type: "LOCAL"
+    - name: "videos"
+      store-type: "LOCAL"
+  - name: "car"
+    file-path: "car"
+    upload-types:
+    - name: "images"
+      store-type: "LOCAL"
+    - name: "videos"
+      store-type: "LOCAL"
