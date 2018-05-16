@@ -15,7 +15,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 		if(SessionContextHolder.getCurrentUserSessionStorage()!=null) {
 			return true;
 		}
-		response.sendRedirect("/login");
+		response.sendRedirect("/");
 		return false;
 	}
 	
