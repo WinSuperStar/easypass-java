@@ -9,11 +9,13 @@ import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.joshua.easypass.config.filter.SessionFilter;
 import com.joshua.easypass.config.listener.SessionAttributeListener;
 import com.joshua.easypass.config.properties.FileUploadProperties;
+import com.joshua.easypass.interceptor.SessionInterceptor;
 
 @Configuration
 public class WebAppConfig implements WebMvcConfigurer{
@@ -44,5 +46,15 @@ public class WebAppConfig implements WebMvcConfigurer{
         ServletListenerRegistrationBean<SessionAttributeListener> servletListenerRegistrationBean = new ServletListenerRegistrationBean<SessionAttributeListener>();
         servletListenerRegistrationBean.setListener(new SessionAttributeListener());
         return servletListenerRegistrationBean;
+    }  
+    
+    @Bean
+    SessionInterceptor sessionInterceptor() {
+    	return new SessionInterceptor();
+    }
+    
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(sessionInterceptor()).addPathPatterns("/**").excludePathPatterns("/lgin","/loginout");
     }    
 }

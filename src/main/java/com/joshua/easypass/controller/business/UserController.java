@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.joshua.easypass.controller.BaseController;
 import com.joshua.easypass.encap.CurrentUserSessionStorage;
 import com.joshua.easypass.entity.User;
-import com.joshua.easypass.holder.SessionContextHolder;
 import com.joshua.easypass.service.UserService;
 
 @RestController
@@ -31,9 +30,10 @@ public class UserController extends BaseController {
     public User Login(@RequestParam("username") String username, @RequestParam("password") String password) {
     	User u = userService.login(username, password);
     	if( u == null ) {
-    		return  new User();
+    		return  null;
     	}
     	getRequest().getSession().setAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY, CurrentUserSessionStorage.fromUser(u));
+    	u.setPassword(null);
         return u;
     }
 
