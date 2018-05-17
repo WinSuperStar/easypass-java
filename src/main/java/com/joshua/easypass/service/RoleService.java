@@ -1,13 +1,14 @@
 package com.joshua.easypass.service;
 
-import com.joshua.easypass.entity.Role;
-import com.joshua.easypass.repository.RoleRepository;
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import com.joshua.easypass.entity.Role;
+import com.joshua.easypass.repository.RoleRepository;
 
 @Service
 public class RoleService {
@@ -29,8 +30,11 @@ public class RoleService {
         roleRepo.save(role);
     }
 
-    public String findAuthlist(String rolename) {
-        return roleRepo.findAuthlist(rolename);
+    public String findAuthlist(Integer roleid) {
+    	logger.info("roleid:"+roleid);
+    	Role role = roleRepo.getRole(roleid);
+    	logger.info("authList:"+role.getAuthlist());
+        return role.getAuthlist();
     }
     @Transactional
     public void updateRole(String rolename, String authlist, Integer roleid) {

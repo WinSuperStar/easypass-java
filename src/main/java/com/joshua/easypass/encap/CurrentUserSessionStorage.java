@@ -77,4 +77,12 @@ public class CurrentUserSessionStorage implements Serializable{
 		currentUserSessionStore.setPhone(user.getPhone());
 		return currentUserSessionStore;
 	}
+
+	@Override
+	public String toString() {
+		return "CurrentUserSessionStorage [userId=" + userId + ", userName=" + userName + ", nickName=" + nickName
+				+ ", userEmail=" + userEmail + ", gender=" + gender + ", phone=" + phone + "]";
+	}
+	
+	
 }

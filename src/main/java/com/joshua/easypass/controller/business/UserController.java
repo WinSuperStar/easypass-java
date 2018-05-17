@@ -41,7 +41,7 @@ public class UserController extends BaseController {
     public void addUser(@RequestParam("username") String username,
                         @RequestParam("phone") String phone,
                         @RequestParam("password") String password,
-                        @RequestParam("rolename") String rolename,
+                        @RequestParam("roleid") Integer roleid,
                         @RequestParam("gender") String gender,
                         @RequestParam("state") String state,
                         @RequestParam("creator") String creator) {
@@ -50,7 +50,7 @@ public class UserController extends BaseController {
         user.setUsername(username);
         user.setPhone(phone);
         user.setPassword(password);
-        user.setRolename(rolename);
+        user.setRoleid(roleid);
         user.setGender(gender);
         user.setState(state);
         user.setCreatedate(currentTime);
@@ -72,7 +72,7 @@ public class UserController extends BaseController {
                              @RequestParam("username") String username,
                              @RequestParam("phone") String phone,
                              @RequestParam("password") String password,
-                             @RequestParam("rolename") String rolename,
+                             @RequestParam("rolenid") Integer roleid,
                              @RequestParam("gender") String gender,
                              @RequestParam("state") String state,
                              @RequestParam("createdate") String createdate,
@@ -83,7 +83,7 @@ public class UserController extends BaseController {
         user.setUsername(username);
         user.setPhone(phone);
         user.setPassword(password);
-        user.setRolename(rolename);
+        user.setRoleid(roleid);
         user.setGender(gender);
         user.setState(state);
         user.setCreatedate(currentTime);

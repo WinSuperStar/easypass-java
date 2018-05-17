@@ -55,6 +55,6 @@ public class WebAppConfig implements WebMvcConfigurer{
     
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(sessionInterceptor()).addPathPatterns("/**").excludePathPatterns("/login","/loginout");
+        registry.addInterceptor(sessionInterceptor()).addPathPatterns("/**").excludePathPatterns("/login","/logout");
     }    
 }
