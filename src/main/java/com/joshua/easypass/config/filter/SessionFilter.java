@@ -24,7 +24,7 @@ public class SessionFilter implements Filter  {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;    
         CurrentUserSessionStorage currentUserSessionStorage = (CurrentUserSessionStorage)request.getSession().getAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY);    
-        if (currentUserSessionStorage != null) {    
+        if (currentUserSessionStorage != null&&currentUserSessionStorage.getUserId()!=null&&currentUserSessionStorage.getUserId()!=0) {    
             //重新设值session  
             request.getSession().setAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY, currentUserSessionStorage);    
         }   
