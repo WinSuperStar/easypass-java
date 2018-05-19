@@ -2,11 +2,14 @@ package com.joshua.easypass.controller.business;
 
 import com.joshua.easypass.entity.Vendor;
 import com.joshua.easypass.service.VendorService;
+import com.joshua.easypass.util.DateUtil;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
@@ -14,6 +17,9 @@ public class VendorController {
     public final static Logger logger = LoggerFactory.getLogger(VendorController.class);
     @Autowired
     private VendorService vdrService;
+
+    @GetMapping(value="/getAllVdrs")
+    public Vendor[] getAllVdrs(){return vdrService.getAllVdrs();}
 
     @PostMapping(value = "/createVdr")
     public Integer createVdr(@RequestParam("creator") String creator) {
@@ -23,6 +29,31 @@ public class VendorController {
     @PostMapping(value = "/getVdr")
     public Vendor getVdr(@RequestParam("vdrid") Integer vdrid) {
         return vdrService.getVdr(vdrid);
+    }
+
+    @PostMapping(value = "/getVdrs")
+    public Vendor[] getVdrs(@RequestParam("vdraddr1") String vdraddr1,
+                            @RequestParam("vdraddr2") String vdraddr2,
+                            @RequestParam("vdraddr3") String vdraddr3,
+                            @RequestParam("vdrplate1") String vdrplate1,
+                            @RequestParam("vdrplate2") String vdrplate2,
+                            @RequestParam("contact") String contact,
+                            @RequestParam("contactphone") String contactphone,
+                            @RequestParam("firstdate") String firstdate,
+                            @RequestParam("state") String state,
+                            @RequestParam("itemlist") String itemlist
+    ) {
+        String[] a = itemlist.split(",");
+        if ("".equals(firstdate)) {
+            return vdrService.getVdrsWithoutDate(vdraddr1, vdraddr2, vdraddr3, vdrplate1, vdrplate2, contact, contactphone, state,
+                    a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8], a[9]);
+        } else {
+            String[] dates = firstdate.split(" ");
+            Date date1 = DateUtil.StrToDate(dates[0]);
+            Date date2 = DateUtil.StrToDate(dates[1]);
+            return vdrService.getVdrsWithDate(vdraddr1, vdraddr2, vdraddr3, vdrplate1, vdrplate2, contact, contactphone, date1, date2, state,
+                    a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8], a[9]);
+        }
     }
 
     @PostMapping(value = "/saveVdr")

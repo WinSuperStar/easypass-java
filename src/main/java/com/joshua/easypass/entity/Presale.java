@@ -7,10 +7,14 @@ import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
-public class Vendor {
+public class Presale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer vdrid;
+    private Integer saleid;
+    private String caraddr;
+    private String carplate;
+    private String cusname;
+    private String cusmode;
     private String vdrname;
     private String vdraddr;
     private String vdraddrdetail;
@@ -93,28 +97,44 @@ public class Vendor {
     private String add2;
     private String add3;
 
-    public Integer getItemQitaReqId() {
-        return itemQitaReqId;
+    public Integer getSaleid() {
+        return saleid;
     }
 
-    public void setItemQitaReqId(Integer itemQitaReqId) {
-        this.itemQitaReqId = itemQitaReqId;
+    public void setSaleid(Integer saleid) {
+        this.saleid = saleid;
     }
 
-    public Date getCommitdate() {
-        return commitdate;
+    public String getCaraddr() {
+        return caraddr;
     }
 
-    public void setCommitdate(Date commitdate) {
-        this.commitdate = commitdate;
+    public void setCaraddr(String caraddr) {
+        this.caraddr = caraddr;
     }
 
-    public Integer getVdrid() {
-        return vdrid;
+    public String getCarplate() {
+        return carplate;
     }
 
-    public void setVdrid(Integer vdrid) {
-        this.vdrid = vdrid;
+    public void setCarplate(String carplate) {
+        this.carplate = carplate;
+    }
+
+    public String getCusname() {
+        return cusname;
+    }
+
+    public void setCusname(String cusname) {
+        this.cusname = cusname;
+    }
+
+    public String getCusmode() {
+        return cusmode;
+    }
+
+    public void setCusmode(String cusmode) {
+        this.cusmode = cusmode;
     }
 
     public String getVdrname() {
@@ -621,12 +641,28 @@ public class Vendor {
         this.itemQitaDesc = itemQitaDesc;
     }
 
+    public Integer getItemQitaReqId() {
+        return itemQitaReqId;
+    }
+
+    public void setItemQitaReqId(Integer itemQitaReqId) {
+        this.itemQitaReqId = itemQitaReqId;
+    }
+
     public String getState() {
         return state;
     }
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public Date getCommitdate() {
+        return commitdate;
+    }
+
+    public void setCommitdate(Date commitdate) {
+        this.commitdate = commitdate;
     }
 
     public Date getCreatedate() {

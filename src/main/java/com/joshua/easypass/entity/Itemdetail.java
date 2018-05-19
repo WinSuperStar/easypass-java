@@ -11,7 +11,13 @@ public class Itemdetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer papid;
-    private String papMaterial;
+    private String matDengji;
+    private String matXingshi;
+    private String matJiaoqiang;
+    private String matGouzhi;
+    private String matFapiao;
+    private String matQita;
+    private String matQitaDesc;
     private String carPresent;
     private float carPresentCost;
     private String carPresentDesc;
@@ -50,7 +56,8 @@ public class Itemdetail {
     private String newLisenceType;
     private String newLisenceDesc;
     private float newLisenceCost;
-
+    private String relatedItemName;
+    private String relatedVendorName;
     private Integer relatedVendorId;
     private Date createdate;
     private String creator;
@@ -59,20 +66,84 @@ public class Itemdetail {
     private String add2;
     private String add3;
 
+    public String getMatDengji() {
+        return matDengji;
+    }
+
+    public void setMatDengji(String matDengji) {
+        this.matDengji = matDengji;
+    }
+
+    public String getMatXingshi() {
+        return matXingshi;
+    }
+
+    public void setMatXingshi(String matXingshi) {
+        this.matXingshi = matXingshi;
+    }
+
+    public String getMatJiaoqiang() {
+        return matJiaoqiang;
+    }
+
+    public void setMatJiaoqiang(String matJiaoqiang) {
+        this.matJiaoqiang = matJiaoqiang;
+    }
+
+    public String getMatGouzhi() {
+        return matGouzhi;
+    }
+
+    public void setMatGouzhi(String matGouzhi) {
+        this.matGouzhi = matGouzhi;
+    }
+
+    public String getMatFapiao() {
+        return matFapiao;
+    }
+
+    public void setMatFapiao(String matFapiao) {
+        this.matFapiao = matFapiao;
+    }
+
+    public String getMatQita() {
+        return matQita;
+    }
+
+    public void setMatQita(String matQita) {
+        this.matQita = matQita;
+    }
+
+    public String getMatQitaDesc() {
+        return matQitaDesc;
+    }
+
+    public void setMatQitaDesc(String matQitaDesc) {
+        this.matQitaDesc = matQitaDesc;
+    }
+
+    public String getRelatedItemName() {
+        return relatedItemName;
+    }
+
+    public void setRelatedItemName(String relatedItemName) {
+        this.relatedItemName = relatedItemName;
+    }
+
+    public String getRelatedVendorName() {
+        return relatedVendorName;
+    }
+
+    public void setRelatedVendorName(String relatedVendorName) {
+        this.relatedVendorName = relatedVendorName;
+    }
+
     public Integer getPapid() {
         return papid;
     }
 
     public void setPapid(Integer papid) {
         this.papid = papid;
-    }
-
-    public String getPapMaterial() {
-        return papMaterial;
-    }
-
-    public void setPapMaterial(String papMaterial) {
-        this.papMaterial = papMaterial;
     }
 
     public String getCarPresent() {
