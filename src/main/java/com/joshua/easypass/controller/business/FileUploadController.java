@@ -34,7 +34,7 @@ public class FileUploadController extends BaseController {
         }
 		String moduleName = getRequest().getParameter("moduleName");
 		for(MultipartFile file : files) {
-			if(fileUploadProperties.validateAalidityFile(moduleName, file)) {
+			if(!fileUploadProperties.validateAalidityFile(moduleName, file)) {
 	        	result.setCode(1);
 	        	result.setMsg("上传文件业务模块的名称必须配置或者上传文件类型未配置");
 	        	return result;
@@ -47,12 +47,15 @@ public class FileUploadController extends BaseController {
 				if(r!=null&&r.getCode()==0) {
 					uploadResult.setRelativeStorePath(uploadResult.getRelativeStorePath()+","+r.getData().getRelativeStorePath());
 					uploadResult.setDomain(fileUploadProperties.getDomain(moduleName, FileUtils.getUploadType(file.getOriginalFilename())));
+
 				}else {
 					return r;
 				}
 			}
 			String relativeStorePath = uploadResult.getRelativeStorePath();
 			uploadResult.setRelativeStorePath(relativeStorePath.substring(1));
+			result.setCode(0);
+			result.setMsg("上传成功");
 		} catch(IOException e){
         	result.setCode(1);
         	result.setMsg("上传文件失败，请联系系统管理员：" + e.getMessage());

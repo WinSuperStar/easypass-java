@@ -44,7 +44,8 @@ public class UserController extends BaseController {
                         @RequestParam("roleid") Integer roleid,
                         @RequestParam("gender") String gender,
                         @RequestParam("state") String state,
-                        @RequestParam("creator") String creator) {
+                        @RequestParam("creator") String creator,
+                        @RequestParam("certpath") String certpath) {
         Date currentTime = new Date();
         User user = new User();
         user.setUsername(username);
@@ -55,6 +56,7 @@ public class UserController extends BaseController {
         user.setState(state);
         user.setCreatedate(currentTime);
         user.setCreator(creator);
+        user.setCertpath(certpath);
         logger.info("新建用户："+user.toString());
         userService.addUser(user);
     }
@@ -72,11 +74,12 @@ public class UserController extends BaseController {
                              @RequestParam("username") String username,
                              @RequestParam("phone") String phone,
                              @RequestParam("password") String password,
-                             @RequestParam("rolenid") Integer roleid,
+                             @RequestParam("roleid") Integer roleid,
                              @RequestParam("gender") String gender,
                              @RequestParam("state") String state,
                              @RequestParam("createdate") String createdate,
-                             @RequestParam("creator") String creator) {
+                             @RequestParam("creator") String creator,
+                             @RequestParam("certpath") String certpath) {
         Date currentTime = new Date();
         User user = new User();
         user.setUserid(Integer.parseInt(userid));
@@ -88,6 +91,7 @@ public class UserController extends BaseController {
         user.setState(state);
         user.setCreatedate(currentTime);
         user.setCreator(creator);
+        user.setCertpath(certpath);
         logger.info("更新用户："+user.toString());
         userService.addUser(user);
     }
