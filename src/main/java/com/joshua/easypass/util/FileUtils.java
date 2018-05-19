@@ -32,7 +32,7 @@ public class FileUtils {
 		} else {
 			fileName = UUID.randomUUID().toString().replaceAll("-", "")+RandomStringUtils.randomNumeric(5)+suffix;
 		}
-		String toFilePath = mergeFilePath(realPath,FileUtils.getUploadType(fileName),moduleName);
+		String toFilePath = mergeFilePath(realPath,FileUtils.getUploadType(fileName),moduleName,DateUtils.currentYear(),DateUtils.currentDate());
 		String toFile = toFilePath+fileName;
 		try {
 			makeFolder(toFilePath);
