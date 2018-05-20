@@ -29,6 +29,7 @@ public class VendorService {
         String addr = s1+ ("".equals(s2)?"":(" "+s2)) + ("".equals(s3)?"":(" "+s3));
         String vdrplate = s4+("".equals(s5)?"":(" "+s5));
         logger.info("vendor查询， 条件地址为"+addr+"，条件牌照为："+vdrplate);
+        logger.info("其他查询条件："+state+" "+i1+" "+i2);
         return vdrRepo.getVdrsWithoutDate(addr,vdrplate,s6,s7,state,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10);
     }
 
@@ -43,6 +44,7 @@ public class VendorService {
         Vendor v = new Vendor();
         v.setCreatedate(new Date());
         v.setCreator(creator);
+        v.setState("未提交");
         v = vdrRepo.saveAndFlush(v);
         return v.getVdrid();
     }

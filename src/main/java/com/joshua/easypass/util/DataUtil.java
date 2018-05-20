@@ -5,6 +5,16 @@ import java.util.List;
 
 public class DataUtil {
 
+    public static String[] VdrSearchTrim(String[] s){
+        String[] a = s;
+        for(int i=0;i<s.length;i++){
+            if("false".equals(a[i])){
+                a[i]="";
+            }
+        }
+        return a;
+    }
+
     public static List<Integer> strToList(String str) {
         if (str.length() != 0) {
             String[] str1 = str.split(",");

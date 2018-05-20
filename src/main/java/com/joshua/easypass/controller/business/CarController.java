@@ -20,7 +20,7 @@ public class CarController{
     private CarService carService;
 
     @GetMapping(value="/car/{carid}")
-    public Car getCar(@RequestParam("carid") Integer carid){
+    public Car getCar(@PathVariable("carid") Integer carid){
         return carService.getCar(carid);
     }
 

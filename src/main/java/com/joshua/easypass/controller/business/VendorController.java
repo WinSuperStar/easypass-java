@@ -2,6 +2,7 @@ package com.joshua.easypass.controller.business;
 
 import com.joshua.easypass.entity.Vendor;
 import com.joshua.easypass.service.VendorService;
+import com.joshua.easypass.util.DataUtil;
 import com.joshua.easypass.util.DateUtil;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
@@ -43,7 +44,9 @@ public class VendorController {
                             @RequestParam("state") String state,
                             @RequestParam("itemlist") String itemlist
     ) {
-        String[] a = itemlist.split(",");
+
+        String[] a = DataUtil.VdrSearchTrim(itemlist.split(","));
+        logger.info(a[0]+" "+a[1]);
         if ("".equals(firstdate)) {
             logger.info("vendor 查询，无日期条件");
             return vdrService.getVdrsWithoutDate(vdraddr1, vdraddr2, vdraddr3, vdrplate1, vdrplate2, contact, contactphone, state,
