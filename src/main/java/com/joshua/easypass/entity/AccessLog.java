@@ -16,7 +16,7 @@ public class AccessLog {
     
     private String url;
     
-    private String methed;
+    private String method;
     
     private String ip ;
     
@@ -46,12 +46,12 @@ public class AccessLog {
 		this.url = url;
 	}
 
-	public String getMethed() {
-		return methed;
+	public String getMethod() {
+		return method;
 	}
 
-	public void setMethed(String methed) {
-		this.methed = methed;
+	public void setMethod(String method) {
+		this.method = method;
 	}
 
 	public String getIp() {

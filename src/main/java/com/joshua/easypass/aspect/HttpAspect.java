@@ -45,7 +45,7 @@ public class HttpAspect {
         accessLog.setUrl(request.getRequestURL().toString());
         // method
         logger.info("method={}",request.getMethod());
-        accessLog.setMethed(request.getMethod());
+        accessLog.setMethod(request.getMethod());
         // ip
         logger.info("ip={}",IpUtils.getIpAddr(request));
         accessLog.setIp(IpUtils.getIpAddr(request));
