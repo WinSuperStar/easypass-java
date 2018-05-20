@@ -10,8 +10,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
@@ -24,7 +26,11 @@ import com.joshua.easypass.config.properties.FileUploadProperties;
 import com.joshua.easypass.interceptor.SessionInterceptor;
 
 @Configuration
+@DependsOn("springContextHolder")
 public class WebAppConfig implements WebMvcConfigurer{
+	@Autowired
+	private ApplicationContext applicationContext;
+	
 	@Autowired 
 	private FileUploadProperties fileUploadProperties;
 

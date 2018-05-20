@@ -23,17 +23,18 @@ public class User {
     private String add1;
     private String add2;
     private String add3;
+  
     private Integer roleid;
 
     public Integer getRoleid() {
-		return roleid;
-	}
+		    return roleid;
+	  }
 
-	public void setRoleid(Integer roleid) {
-		this.roleid = roleid;
-	}
+	  public void setRoleid(Integer roleid) {
+		    this.roleid = roleid;
+	  }
 
-	public Integer getUserid() {
+	  public Integer getUserid() {
         return userid;
     }
 
@@ -156,4 +157,18 @@ public class User {
                 ", rolenid='" + roleid + '\'' +
                 '}';
     }
+
+	public Integer getRoleid() {
+		return roleid;
+	}
+
+	public void setRoleid(Integer roleid) {
+		this.roleid = roleid;
+	}
+
+	
+
+	
+    
+    
 }

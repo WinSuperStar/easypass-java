@@ -31,13 +31,20 @@ public class RoleService {
     }
 
     public String findAuthlist(Integer roleid) {
-    	logger.info("roleid:"+roleid);
-    	Role role = roleRepo.getRole(roleid);
-    	logger.info("authList:"+role.getAuthlist());
+
+    	  logger.info("roleid:"+roleid);
+    	  Role role = roleRepo.getRole(roleid);
+    	  logger.info("authList:"+role.getAuthlist());
         return role.getAuthlist();
     }
+  
     @Transactional
     public void updateRole(String rolename, String authlist, Integer roleid) {
         roleRepo.updateRole(rolename, authlist, roleid);
+    }
+    
+    @Transactional
+    public void delRole(Integer id) {
+        roleRepo.deleteById(id);
     }
 }

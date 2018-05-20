@@ -21,6 +21,8 @@ public class CurrentUserSessionStorage implements Serializable{
 	private String gender;
 	
 	private String phone;
+	
+	private Integer roleId;
 
 	public Long getUserId() {
 		return userId;
@@ -75,14 +77,23 @@ public class CurrentUserSessionStorage implements Serializable{
 		currentUserSessionStore.setUserId(Long.valueOf(user.getUserid()));
 		currentUserSessionStore.setUserName(user.getUsername());
 		currentUserSessionStore.setPhone(user.getPhone());
+		currentUserSessionStore.setRoleId(user.getRoleid());
 		return currentUserSessionStore;
 	}
+
+	public Integer getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
+
 
 	@Override
 	public String toString() {
 		return "CurrentUserSessionStorage [userId=" + userId + ", userName=" + userName + ", nickName=" + nickName
 				+ ", userEmail=" + userEmail + ", gender=" + gender + ", phone=" + phone + "]";
 	}
-	
 	
 }

@@ -25,4 +25,10 @@ public class AuthService {
         logger.info("权限id清单为："+authids);
         return authRepo.getAuthNames(DataUtil.strToList(authids));
     }
+    
+    
+    public List<Authlist> getAuthlist(String authids){
+        logger.info("权限id清单为："+authids);
+        return authRepo.getAuthlist(DataUtil.strToList(authids));
+    }
 }

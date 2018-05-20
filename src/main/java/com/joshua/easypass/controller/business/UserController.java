@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.joshua.easypass.constants.Contants;
 import com.joshua.easypass.controller.BaseController;
 import com.joshua.easypass.encap.CurrentUserSessionStorage;
 import com.joshua.easypass.entity.User;
@@ -66,7 +67,13 @@ public class UserController extends BaseController {
                            @RequestParam("phone") String phone,
                            @RequestParam("role") String role,
                            @RequestParam("state") String state) {
-        return userService.getUsers(username, phone, role, ("所有".equals(state)?"":state));
+    	
+    	CurrentUserSessionStorage userSession=(CurrentUserSessionStorage)getRequest().getSession().getAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY);
+        if(userSession.getRoleId()!=null&&userSession.getRoleId()==Contants.sysRole){
+    	    return userService.getUsers(username, phone, role, ("所有".equals(state)?"":state));
+        }else{
+        	return userService.getUsersByOwner(username, phone, role, ("所有".equals(state)?"":state),userSession.getUserId().intValue());
+        }
     }
 
     @PutMapping(value = "/user")
