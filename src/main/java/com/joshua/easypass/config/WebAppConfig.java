@@ -10,26 +10,21 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.joshua.easypass.config.filter.SessionFilter;
 import com.joshua.easypass.config.listener.SessionAttributeListener;
 import com.joshua.easypass.config.properties.FileUploadProperties;
-import com.joshua.easypass.interceptor.SessionInterceptor;
 
 @Configuration
 @DependsOn("springContextHolder")
 public class WebAppConfig implements WebMvcConfigurer{
-	@Autowired
-	private ApplicationContext applicationContext;
 	
 	@Autowired 
 	private FileUploadProperties fileUploadProperties;
@@ -60,10 +55,10 @@ public class WebAppConfig implements WebMvcConfigurer{
         return servletListenerRegistrationBean;
     }  
     
-    @Bean
-    SessionInterceptor sessionInterceptor() {
-    	return new SessionInterceptor();
-    }
+//    @Bean
+//    SessionInterceptor sessionInterceptor() {
+//    	return new SessionInterceptor();
+//    }
     
 
     
@@ -73,10 +68,10 @@ public class WebAppConfig implements WebMvcConfigurer{
         return converter;
     }
     
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(sessionInterceptor()).addPathPatterns("/**").excludePathPatterns("/login","/logout");
-    }  
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(sessionInterceptor()).addPathPatterns("/**").excludePathPatterns("/login","/logout");
+//    }  
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {

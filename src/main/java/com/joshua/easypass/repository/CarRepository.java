@@ -1,13 +1,12 @@
 package com.joshua.easypass.repository;
 
-import com.joshua.easypass.entity.Car;
-import com.joshua.easypass.entity.Carinfo;
+import java.util.Date;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Date;
-import java.util.List;
+import com.joshua.easypass.entity.Car;
 
 public interface CarRepository extends JpaRepository<Car, Integer> {
     @Query("SELECT c from Car c")

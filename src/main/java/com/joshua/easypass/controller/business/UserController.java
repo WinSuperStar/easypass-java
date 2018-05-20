@@ -1,7 +1,9 @@
 package com.joshua.easypass.controller.business;
 
 import java.util.Date;
+import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.joshua.easypass.constants.Contants;
 import com.joshua.easypass.controller.BaseController;
 import com.joshua.easypass.encap.CurrentUserSessionStorage;
+import com.joshua.easypass.entity.Authlist;
 import com.joshua.easypass.entity.User;
+import com.joshua.easypass.service.AuthService;
+import com.joshua.easypass.service.RoleService;
 import com.joshua.easypass.service.UserService;
 
 @RestController
@@ -26,14 +31,24 @@ public class UserController extends BaseController {
     public final static Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserService userService;
-
+    
+    @Autowired
+    private RoleService roleService;
+    @Autowired
+    private AuthService authService;
+    
     @PostMapping(value = "/login")
     public User Login(@RequestParam("username") String username, @RequestParam("password") String password) {
     	User u = userService.login(username, password);
     	if( u == null ) {
     		return  null;
     	}
-    	getRequest().getSession().setAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY, CurrentUserSessionStorage.fromUser(u));
+		String authids = roleService.findAuthlist(u.getRoleid().intValue());
+		List<Authlist> authlist = null;
+		if (authids != null && StringUtils.isNotBlank(authids)) {
+			authlist = authService.getAuthlist(authids);
+		}
+    	getRequest().getSession().setAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY, CurrentUserSessionStorage.fromUser(u,authlist));
     	u.setPassword(null);
         return u;
     }
@@ -65,14 +80,14 @@ public class UserController extends BaseController {
     @PostMapping(value = "/users")
     public User[] getUsers(@RequestParam("username") String username,
                            @RequestParam("phone") String phone,
-                           @RequestParam("role") String role,
+                           @RequestParam("roleid") Integer roleid,
                            @RequestParam("state") String state) {
     	
     	CurrentUserSessionStorage userSession=(CurrentUserSessionStorage)getRequest().getSession().getAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY);
         if(userSession.getRoleId()!=null&&userSession.getRoleId()==Contants.sysRole){
-    	    return userService.getUsers(username, phone, role, ("所有".equals(state)?"":state));
+    	    return userService.getUsers(username, phone, roleid, ("所有".equals(state)?"":state));
         }else{
-        	return userService.getUsersByOwner(username, phone, role, ("所有".equals(state)?"":state),userSession.getUserId().intValue());
+        	return userService.getUsersByOwner(username, phone, roleid, ("所有".equals(state)?"":state),userSession.getUserId().intValue());
         }
     }
 

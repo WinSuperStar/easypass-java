@@ -3,9 +3,9 @@ spring:
     active: dev
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/mydb?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://192.168.188.244:3306/mydb?useSSL=false&useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: 1qaz@WSX
+    password: carkingERP2014
   jpa:
     hibernate:
       ddl-auto: update

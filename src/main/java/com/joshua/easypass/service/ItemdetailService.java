@@ -1,15 +1,14 @@
 package com.joshua.easypass.service;
 
-import com.joshua.easypass.entity.Itemdetail;
-import com.joshua.easypass.entity.Vendor;
-import com.joshua.easypass.repository.ItemdetailRepository;
-import com.joshua.easypass.repository.VendorRepository;
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import com.joshua.easypass.entity.Itemdetail;
+import com.joshua.easypass.repository.ItemdetailRepository;
 
 @Service
 public class ItemdetailService {

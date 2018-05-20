@@ -11,6 +11,9 @@ public class Authlist {
     private String authname;
     private String authtype;
     private String authsubtype;
+    
+    @Column(name="auth_url")
+    private String authUrl;
     @Column(name="auth_desc")
     private String desc;
     private String add1;
@@ -82,4 +85,12 @@ public class Authlist {
     public void setAdd3(String add3) {
         this.add3 = add3;
     }
+
+	public String getAuthUrl() {
+		return authUrl;
+	}
+
+	public void setAuthUrl(String authUrl) {
+		this.authUrl = authUrl;
+	}
 }

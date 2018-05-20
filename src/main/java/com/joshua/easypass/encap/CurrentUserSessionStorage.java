@@ -1,7 +1,9 @@
 package com.joshua.easypass.encap;
 
 import java.io.Serializable;
+import java.util.List;
 
+import com.joshua.easypass.entity.Authlist;
 import com.joshua.easypass.entity.User;
 
 public class CurrentUserSessionStorage implements Serializable{
@@ -23,6 +25,8 @@ public class CurrentUserSessionStorage implements Serializable{
 	private String phone;
 	
 	private Integer roleId;
+	
+	private List<Authlist> authList;
 
 	public Long getUserId() {
 		return userId;
@@ -72,12 +76,13 @@ public class CurrentUserSessionStorage implements Serializable{
 		this.phone = phone;
 	}
 
-	public static CurrentUserSessionStorage fromUser(User user) {
+	public static CurrentUserSessionStorage fromUser(User user ,List<Authlist> authList) {
 		CurrentUserSessionStorage currentUserSessionStore = new CurrentUserSessionStorage();
 		currentUserSessionStore.setUserId(Long.valueOf(user.getUserid()));
 		currentUserSessionStore.setUserName(user.getUsername());
 		currentUserSessionStore.setPhone(user.getPhone());
 		currentUserSessionStore.setRoleId(user.getRoleid());
+		currentUserSessionStore.setAuthList(authList);
 		return currentUserSessionStore;
 	}
 
@@ -88,12 +93,18 @@ public class CurrentUserSessionStorage implements Serializable{
 	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
+	
+	public List<Authlist> getAuthList() {
+		return authList;
+	}
 
+	public void setAuthList(List<Authlist> authList) {
+		this.authList = authList;
+	}
 
 	@Override
 	public String toString() {
 		return "CurrentUserSessionStorage [userId=" + userId + ", userName=" + userName + ", nickName=" + nickName
-				+ ", userEmail=" + userEmail + ", gender=" + gender + ", phone=" + phone + "]";
+				+ ", userEmail=" + userEmail + ", gender=" + gender + ", phone=" + phone + ", roleId=" + roleId +"  ]";
 	}
-	
 }

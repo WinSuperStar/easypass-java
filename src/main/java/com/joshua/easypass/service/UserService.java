@@ -17,14 +17,14 @@ public class UserService {
     @Autowired
     private UserRepository userRepo;
 
-    public User[] getUsers(String username, String phone, String role, String state) {
-        logger.info("查询中：用户名为{},手机号码为{}, 岗位为{}, 状态为{}", username, phone, role, state);
-        return userRepo.getUsers(username, phone, role, state);
+    public User[] getUsers(String username, String phone, Integer roleid, String state) {
+        logger.info("查询中：用户名为{},手机号码为{}, 岗位为{}, 状态为{}", username, phone, roleid, state);
+        return userRepo.getUsers(username, phone, roleid, state);
     }
     
-    public User[] getUsersByOwner(String username, String phone, String role, String state,Integer userid) {
-        logger.info("查询中：用户名为{},手机号码为{}, 岗位为{}, 状态为{}", username, phone, role, state);
-        return userRepo.getUsersByOwner(username, phone, role, state,userid);
+    public User[] getUsersByOwner(String username, String phone, Integer roleid, String state,Integer userid) {
+        logger.info("查询中：用户名为{},手机号码为{}, 岗位为{}, 状态为{}", username, phone, roleid, state);
+        return userRepo.getUsersByOwner(username, phone, roleid, state,userid);
     }
 
     public User[] getAllUsers(){return userRepo.getAllUsers();}
