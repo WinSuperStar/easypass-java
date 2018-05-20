@@ -33,8 +33,10 @@ public class AuthUtil {
 		boolean flag=false;
 		if (authList != null && !authList.isEmpty()) {
 			for(Authlist auth:authList) {
-				if(auth.getAuthData().equalsIgnoreCase(authData)){
-					flag=true;
+				if(StringUtils.isNotBlank(auth.getAuthData())){
+					if(auth.getAuthData().equalsIgnoreCase(authData)){
+						flag=true;
+					}
 				}
 			} 
 			
