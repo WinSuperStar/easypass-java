@@ -23,6 +23,7 @@ import com.joshua.easypass.entity.User;
 import com.joshua.easypass.service.AuthService;
 import com.joshua.easypass.service.RoleService;
 import com.joshua.easypass.service.UserService;
+import com.joshua.easypass.util.AuthUtil;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
@@ -84,11 +85,17 @@ public class UserController extends BaseController {
                            @RequestParam("state") String state) {
     	
     	CurrentUserSessionStorage userSession=(CurrentUserSessionStorage)getRequest().getSession().getAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY);
-        if(userSession.getRoleId()!=null&&userSession.getRoleId()==Contants.sysRole){
+    	boolean flag =AuthUtil.hasAuthByAuthData(userSession.getAuthList(), "QUERY_USERS_ALL");
+        if(flag){
     	    return userService.getUsers(username, phone, roleid, ("所有".equals(state)?"":state));
-        }else{
-        	return userService.getUsersByOwner(username, phone, roleid, ("所有".equals(state)?"":state),userSession.getUserId().intValue());
+        }else {
+        	flag =AuthUtil.hasAuthByAuthData(userSession.getAuthList(), "QUERY_USERS_BY_OWNER");
+        	if(flag){
+        	   return userService.getUsersByOwner(username, phone, roleid, ("所有".equals(state)?"":state),userSession.getUserId().intValue());
+        	}
+        	   return  null;
         }
+       
     }
 
     @PutMapping(value = "/user")

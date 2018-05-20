@@ -19,6 +19,8 @@ public class Authlist {
     private String add1;
     private String add2;
     private String add3;
+    @Column(name="auth_data")
+    private String authData;
 
     public Integer getAuthid() {
         return authid;
@@ -93,4 +95,15 @@ public class Authlist {
 	public void setAuthUrl(String authUrl) {
 		this.authUrl = authUrl;
 	}
+
+	public String getAuthData() {
+		return authData;
+	}
+
+	public void setAuthData(String authData) {
+		this.authData = authData;
+	}
+	
+	
+	
 }
