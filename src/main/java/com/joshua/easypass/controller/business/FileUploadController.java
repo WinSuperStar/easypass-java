@@ -32,7 +32,7 @@ public class FileUploadController extends BaseController {
         	result.setMsg("上传文件不能够为空");
         	return result;
         }
-		String moduleName = getRequest().getParameter("moduleName");
+		String moduleName = request.getParameter("moduleName");
 		for(MultipartFile file : files) {
 			if(!fileUploadProperties.validateAalidityFile(moduleName, file)) {
 	        	result.setCode(1);

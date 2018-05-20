@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.joshua.easypass.constants.Contants;
 import com.joshua.easypass.controller.BaseController;
 import com.joshua.easypass.encap.CurrentUserSessionStorage;
 import com.joshua.easypass.entity.Authlist;
@@ -23,6 +22,8 @@ import com.joshua.easypass.entity.User;
 import com.joshua.easypass.service.AuthService;
 import com.joshua.easypass.service.RoleService;
 import com.joshua.easypass.service.UserService;
+import com.joshua.easypass.util.AuthUtil;
+import com.joshua.easypass.util.CookieHelper;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
@@ -49,7 +50,8 @@ public class UserController extends BaseController {
 		if (authids != null && StringUtils.isNotBlank(authids)) {
 			authlist = authService.getAuthlist(authids);
 		}
-    	getRequest().getSession().setAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY, CurrentUserSessionStorage.fromUser(u,authlist));
+    	request.getSession().setAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY, CurrentUserSessionStorage.fromUser(u,authlist));
+    	CookieHelper.setCookie(response, request, "domain", fileUploadProperties.getDefaultDomain());
     	u.setPassword(null);
         return u;
     }
@@ -84,12 +86,18 @@ public class UserController extends BaseController {
                            @RequestParam("roleid") Integer roleid,
                            @RequestParam("state") String state) {
     	
-    	CurrentUserSessionStorage userSession=(CurrentUserSessionStorage)getRequest().getSession().getAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY);
-        if(userSession.getRoleId()!=null&&userSession.getRoleId()==Contants.sysRole){
+    	CurrentUserSessionStorage userSession=(CurrentUserSessionStorage)request.getSession().getAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY);
+    	boolean flag =AuthUtil.hasAuthByAuthData(userSession.getAuthList(), "QUERY_USERS_ALL");
+        if(flag){
     	    return userService.getUsers(username, phone, roleid, ("所有".equals(state)?"":state));
-        }else{
-        	return userService.getUsersByOwner(username, phone, roleid, ("所有".equals(state)?"":state),userSession.getUserId().intValue());
+        }else {
+        	flag =AuthUtil.hasAuthByAuthData(userSession.getAuthList(), "QUERY_USERS_BY_OWNER");
+        	if(flag){
+        	   return userService.getUsersByOwner(username, phone, roleid, ("所有".equals(state)?"":state),userSession.getUserId().intValue());
+        	}
+        	   return  null;
         }
+       
     }
 
     @PutMapping(value = "/user")
