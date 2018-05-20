@@ -21,11 +21,12 @@ public class ItemdetailController {
     private ItemdetailService idService;
 
     @PostMapping(value = "/createItemdetail")
-    public Integer createVdr(@RequestParam("vdrid") Integer vdrid,
-                             @RequestParam("vdrname") String vdrname,
+    public Integer createVdr(@RequestParam("billid") Integer billid,
+                             @RequestParam("billname") String billname,
                              @RequestParam("itemname") String itemname,
-                             @RequestParam("creator") String creator) {
-        return idService.createItemdetail(vdrid, vdrname, itemname, creator);
+                             @RequestParam("creator") String creator,
+                             @RequestParam("billtype") String billtype) {
+        return idService.createItemdetail(billid, billname, itemname, creator, billtype);
     }
 
     @PostMapping(value="/saveItemdetail")

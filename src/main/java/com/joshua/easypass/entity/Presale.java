@@ -47,6 +47,7 @@ public class Presale {
     private String itemWeizhang;
     private float itemWeizhangTax;
     private float itemWeizhangCost;
+    private float itemWeizhangCost2;
     private Date itemWeizhangCompletedate;
     private String itemWeizhangDesc;
     private Integer itemWeizhangReqId;
@@ -96,6 +97,14 @@ public class Presale {
     private String add1;
     private String add2;
     private String add3;
+
+    public float getItemWeizhangCost2() {
+        return itemWeizhangCost2;
+    }
+
+    public void setItemWeizhangCost2(float itemWeizhangCost2) {
+        this.itemWeizhangCost2 = itemWeizhangCost2;
+    }
 
     public Integer getSaleid() {
         return saleid;

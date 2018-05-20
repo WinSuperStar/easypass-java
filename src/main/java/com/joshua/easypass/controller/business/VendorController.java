@@ -45,9 +45,11 @@ public class VendorController {
     ) {
         String[] a = itemlist.split(",");
         if ("".equals(firstdate)) {
+            logger.info("vendor 查询，无日期条件");
             return vdrService.getVdrsWithoutDate(vdraddr1, vdraddr2, vdraddr3, vdrplate1, vdrplate2, contact, contactphone, state,
                     a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8], a[9]);
         } else {
+            logger.info("vendor 查询，有日期条件");
             String[] dates = firstdate.split(" ");
             Date date1 = DateUtil.StrToDate(dates[0]);
             Date date2 = DateUtil.StrToDate(dates[1]);

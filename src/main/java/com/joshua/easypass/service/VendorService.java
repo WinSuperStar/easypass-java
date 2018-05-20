@@ -28,6 +28,7 @@ public class VendorService {
                             String i1, String i2, String i3, String i4, String i5, String i6, String i7, String i8, String i9, String i10){
         String addr = s1+ ("".equals(s2)?"":(" "+s2)) + ("".equals(s3)?"":(" "+s3));
         String vdrplate = s4+("".equals(s5)?"":(" "+s5));
+        logger.info("vendor查询， 条件地址为"+addr+"，条件牌照为："+vdrplate);
         return vdrRepo.getVdrsWithoutDate(addr,vdrplate,s6,s7,state,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10);
     }
 

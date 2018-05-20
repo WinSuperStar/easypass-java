@@ -17,13 +17,14 @@ public class ItemdetailService {
     @Autowired
     private ItemdetailRepository idRepo;
 
-    public Integer createItemdetail(Integer vdrid, String vdrname, String itemname, String creator) {
+    public Integer createItemdetail(Integer billid, String billname, String itemname, String creator, String billtype) {
         Itemdetail i = new Itemdetail();
         i.setCreatedate(new Date());
         i.setCreator(creator);
-        i.setRelatedVendorId(vdrid);
-        i.setRelatedVendorName(vdrname);
+        i.setRelatedBillId(billid);
+        i.setRelatedBillName(billname);
         i.setRelatedItemName(itemname);
+        i.setRelatedBillType(billtype);
         i = idRepo.saveAndFlush(i);
         return i.getPapid();
     }

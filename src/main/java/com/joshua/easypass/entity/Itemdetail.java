@@ -57,14 +57,23 @@ public class Itemdetail {
     private String newLisenceDesc;
     private float newLisenceCost;
     private String relatedItemName;
-    private String relatedVendorName;
-    private Integer relatedVendorId;
+    private String relatedBillName;
+    private Integer relatedBillId;
+    private String relatedBillType;
     private Date createdate;
     private String creator;
     private String state;
     private String add1;
     private String add2;
     private String add3;
+
+    public Integer getPapid() {
+        return papid;
+    }
+
+    public void setPapid(Integer papid) {
+        this.papid = papid;
+    }
 
     public String getMatDengji() {
         return matDengji;
@@ -120,30 +129,6 @@ public class Itemdetail {
 
     public void setMatQitaDesc(String matQitaDesc) {
         this.matQitaDesc = matQitaDesc;
-    }
-
-    public String getRelatedItemName() {
-        return relatedItemName;
-    }
-
-    public void setRelatedItemName(String relatedItemName) {
-        this.relatedItemName = relatedItemName;
-    }
-
-    public String getRelatedVendorName() {
-        return relatedVendorName;
-    }
-
-    public void setRelatedVendorName(String relatedVendorName) {
-        this.relatedVendorName = relatedVendorName;
-    }
-
-    public Integer getPapid() {
-        return papid;
-    }
-
-    public void setPapid(Integer papid) {
-        this.papid = papid;
     }
 
     public String getCarPresent() {
@@ -442,12 +427,36 @@ public class Itemdetail {
         this.newLisenceCost = newLisenceCost;
     }
 
-    public Integer getRelatedVendorId() {
-        return relatedVendorId;
+    public String getRelatedItemName() {
+        return relatedItemName;
     }
 
-    public void setRelatedVendorId(Integer relatedVendorId) {
-        this.relatedVendorId = relatedVendorId;
+    public void setRelatedItemName(String relatedItemName) {
+        this.relatedItemName = relatedItemName;
+    }
+
+    public String getRelatedBillName() {
+        return relatedBillName;
+    }
+
+    public void setRelatedBillName(String relatedBillName) {
+        this.relatedBillName = relatedBillName;
+    }
+
+    public Integer getRelatedBillId() {
+        return relatedBillId;
+    }
+
+    public void setRelatedBillId(Integer relatedBillId) {
+        this.relatedBillId = relatedBillId;
+    }
+
+    public String getRelatedBillType() {
+        return relatedBillType;
+    }
+
+    public void setRelatedBillType(String relatedBillType) {
+        this.relatedBillType = relatedBillType;
     }
 
     public Date getCreatedate() {
