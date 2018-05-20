@@ -43,6 +43,7 @@ public class UserController extends BaseController {
     	if( u == null ) {
     		return  null;
     	}
+    	logger.info("用户信息："+ u);
 		String authids = roleService.findAuthlist(u.getRoleid().intValue());
 		List<Authlist> authlist = null;
 		if (authids != null && StringUtils.isNotBlank(authids)) {
