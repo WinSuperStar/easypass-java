@@ -1,5 +1,7 @@
 package com.joshua.easypass.aspect;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,7 +20,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.joshua.easypass.entity.AccessLog;
 import com.joshua.easypass.holder.SessionContextHolder;
 import com.joshua.easypass.util.IpUtils;
-import com.joshua.easypass.util.ObjectHelper;
 
 import net.sf.json.util.JSONUtils;
 
@@ -68,7 +69,7 @@ public class HttpAspect {
         // 记录当前登录用户名
         logger.info("username={}",SessionContextHolder.getCurrentUserSessionStorage().getUserName());
         accessLog.setUsername(SessionContextHolder.getCurrentUserSessionStorage().getUserName());
-
+        accessLog.setOperatorTime(new Date());
         accessLogQueue.add(accessLog);
     }
 

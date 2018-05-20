@@ -34,7 +34,12 @@ public class CarController{
         SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd"); //加上时间
         Date date1 = "".equals(firstdate1)? null: sDateFormat.parse(firstdate1);
         Date date2 = "".equals(firstdate1)? null: sDateFormat.parse(firstdate2);
-        return carService.getCars(carnum,carbrand,carset,date1,date2,creator);
+        if("".equals(firstdate1)){
+            return carService.getCars(carnum,carbrand,carset,creator);
+        }else{
+            return carService.getCarsWithdate(carnum,carbrand,carset,sDateFormat.parse(firstdate1),sDateFormat.parse(firstdate2), creator);
+        }
+
     }
 
     @PostMapping(value="/saveCar")

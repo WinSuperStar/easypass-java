@@ -31,8 +31,12 @@ public class CarService {
         return carRepo.getAllCars();
     }
 
-    public Car[] getCars(String carnum, String carbrand, String carset, Date firstdate1, Date firstdate2, String creator ){
-        return carRepo.getCars(carnum,carbrand,carset,firstdate1,firstdate2,creator);
+    public Car[] getCarsWithdate(String carnum, String carbrand, String carset, Date firstdate1, Date firstdate2, String creator ){
+        return carRepo.getCarsWithdate(carnum,carbrand,carset,firstdate1,firstdate2,creator);
+    }
+
+    public Car[] getCars(String carnum, String carbrand, String carset, String creator ){
+        return carRepo.getCars(carnum,carbrand,carset,creator);
     }
 
     public void saveCar(Car car){

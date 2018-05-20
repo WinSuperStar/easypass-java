@@ -12,8 +12,11 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
     @Query("SELECT c from Car c")
     public Car[] getAllCars();
 
-    @Query("SELECT c from Car c WHERE c.carnum like %:carnum% AND c.carbrand like %:carbrand% AND c.carset like %:carset% AND c.firstdate > :firstdate1 AND c.firstdate < :firstdate2 AND c.creator = :creator")
-    public Car[] getCars(@Param("carnum") String carnum, @Param("carbrand") String carbrand, @Param("carset") String carset, @Param("firstdate1") Date firstdate1, @Param("firstdate2") Date firstdate2, @Param("creator") String creator);
+    @Query("SELECT c from Car c WHERE c.carnum like %:carnum% AND c.carbrand like %:carbrand% AND c.carset like %:carset% AND c.firstdate > :firstdate1 AND c.firstdate < :firstdate2 AND c.creator like %:creator%")
+    public Car[] getCarsWithdate(@Param("carnum") String carnum, @Param("carbrand") String carbrand, @Param("carset") String carset, @Param("firstdate1") Date firstdate1, @Param("firstdate2") Date firstdate2, @Param("creator") String creator);
+
+    @Query("SELECT c from Car c WHERE c.carnum like %:carnum% AND c.carbrand like %:carbrand% AND c.carset like %:carset% AND c.creator like %:creator%")
+    public Car[] getCars(@Param("carnum") String carnum, @Param("carbrand") String carbrand, @Param("carset") String carset, @Param("creator") String creator);
 
     @Query("SELECT c FROM Car c WHERE c.carid = :carid")
     public Car getCar(@Param("carid") Integer carid);
