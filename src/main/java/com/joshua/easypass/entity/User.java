@@ -23,18 +23,18 @@ public class User {
     private String add1;
     private String add2;
     private String add3;
-    private String rolename;
+  
     private Integer roleid;
 
-    public String getRolename() {
-        return rolename;
-    }
+    public Integer getRoleid() {
+		    return roleid;
+	  }
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename;
-    }
+	  public void setRoleid(Integer roleid) {
+		    this.roleid = roleid;
+	  }
 
-    public Integer getUserid() {
+	  public Integer getUserid() {
         return userid;
     }
 
@@ -154,7 +154,7 @@ public class User {
                 ", add1='" + add1 + '\'' +
                 ", add2='" + add2 + '\'' +
                 ", add3='" + add3 + '\'' +
-                ", rolename='" + rolename + '\'' +
+                ", rolenid='" + roleid + '\'' +
                 '}';
     }
 

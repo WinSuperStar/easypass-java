@@ -3,12 +3,13 @@ spring:
     active: dev
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.188.244:3306/mydb?useSSL=false
+    url: jdbc:mysql://localhost:3306/mydb?useSSL=false&useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: carkingERP2014
+    password: 1qaz@WSX
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL57InnoDBDialect
     show-sql: true
 upload:
   open: true

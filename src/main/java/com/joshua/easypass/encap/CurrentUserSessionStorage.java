@@ -89,12 +89,11 @@ public class CurrentUserSessionStorage implements Serializable{
 		this.roleId = roleId;
 	}
 
-	
 
-	
-
-	
-	
-	
+	@Override
+	public String toString() {
+		return "CurrentUserSessionStorage [userId=" + userId + ", userName=" + userName + ", nickName=" + nickName
+				+ ", userEmail=" + userEmail + ", gender=" + gender + ", phone=" + phone + "]";
+	}
 	
 }

@@ -1,5 +1,8 @@
 package com.joshua.easypass.config;
 
+import java.nio.charset.Charset;
+import java.util.List;
+
 import javax.servlet.MultipartConfigElement;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +14,16 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.joshua.easypass.config.filter.SessionFilter;
 import com.joshua.easypass.config.listener.SessionAttributeListener;
 import com.joshua.easypass.config.properties.FileUploadProperties;
+import com.joshua.easypass.interceptor.SessionInterceptor;
 
 @Configuration
 @DependsOn("springContextHolder")
@@ -50,5 +58,33 @@ public class WebAppConfig implements WebMvcConfigurer{
         ServletListenerRegistrationBean<SessionAttributeListener> servletListenerRegistrationBean = new ServletListenerRegistrationBean<SessionAttributeListener>();
         servletListenerRegistrationBean.setListener(new SessionAttributeListener());
         return servletListenerRegistrationBean;
+    }  
+    
+    @Bean
+    SessionInterceptor sessionInterceptor() {
+    	return new SessionInterceptor();
+    }
+    
+
+    
+    @Bean
+    public HttpMessageConverter<String> responseBodyConverter() {
+        StringHttpMessageConverter converter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+        return converter;
+    }
+    
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(sessionInterceptor()).addPathPatterns("/**").excludePathPatterns("/login","/logout");
+    }  
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(responseBodyConverter());
+    }
+
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer.favorPathExtension(false);
     }    
 }

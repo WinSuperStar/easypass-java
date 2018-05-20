@@ -17,7 +17,6 @@ import com.joshua.easypass.constants.Contants;
 import com.joshua.easypass.controller.BaseController;
 import com.joshua.easypass.encap.CurrentUserSessionStorage;
 import com.joshua.easypass.entity.User;
-import com.joshua.easypass.holder.SessionContextHolder;
 import com.joshua.easypass.service.UserService;
 
 @RestController
@@ -32,9 +31,10 @@ public class UserController extends BaseController {
     public User Login(@RequestParam("username") String username, @RequestParam("password") String password) {
     	User u = userService.login(username, password);
     	if( u == null ) {
-    		return  new User();
+    		return  null;
     	}
     	getRequest().getSession().setAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY, CurrentUserSessionStorage.fromUser(u));
+    	u.setPassword(null);
         return u;
     }
 
@@ -42,20 +42,22 @@ public class UserController extends BaseController {
     public void addUser(@RequestParam("username") String username,
                         @RequestParam("phone") String phone,
                         @RequestParam("password") String password,
-                        @RequestParam("rolename") String rolename,
+                        @RequestParam("roleid") Integer roleid,
                         @RequestParam("gender") String gender,
                         @RequestParam("state") String state,
-                        @RequestParam("creator") String creator) {
+                        @RequestParam("creator") String creator,
+                        @RequestParam("certpath") String certpath) {
         Date currentTime = new Date();
         User user = new User();
         user.setUsername(username);
         user.setPhone(phone);
         user.setPassword(password);
-        user.setRolename(rolename);
+        user.setRoleid(roleid);
         user.setGender(gender);
         user.setState(state);
         user.setCreatedate(currentTime);
         user.setCreator(creator);
+        user.setCertpath(certpath);
         logger.info("新建用户："+user.toString());
         userService.addUser(user);
     }
@@ -79,22 +81,24 @@ public class UserController extends BaseController {
                              @RequestParam("username") String username,
                              @RequestParam("phone") String phone,
                              @RequestParam("password") String password,
-                             @RequestParam("rolename") String rolename,
+                             @RequestParam("roleid") Integer roleid,
                              @RequestParam("gender") String gender,
                              @RequestParam("state") String state,
                              @RequestParam("createdate") String createdate,
-                             @RequestParam("creator") String creator) {
+                             @RequestParam("creator") String creator,
+                             @RequestParam("certpath") String certpath) {
         Date currentTime = new Date();
         User user = new User();
         user.setUserid(Integer.parseInt(userid));
         user.setUsername(username);
         user.setPhone(phone);
         user.setPassword(password);
-        user.setRolename(rolename);
+        user.setRoleid(roleid);
         user.setGender(gender);
         user.setState(state);
         user.setCreatedate(currentTime);
         user.setCreator(creator);
+        user.setCertpath(certpath);
         logger.info("更新用户："+user.toString());
         userService.addUser(user);
     }

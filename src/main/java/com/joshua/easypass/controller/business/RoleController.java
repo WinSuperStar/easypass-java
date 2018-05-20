@@ -34,7 +34,12 @@ public class RoleController {
     }
 
     @PostMapping(value="/permission")
-    public String findAuthlist(@RequestParam("roleid") Integer roleid){ return roleService.findAuthlist(roleid); }
+    public String findAuthlist(@RequestParam("roleid") Integer roleid){ 
+    	String authlist = roleService.findAuthlist(roleid);
+    	System.out.println("==========================Authlist:"+authlist);
+    	return authlist; 
+    }
+
 
     @PostMapping(value = "/addRole")
     public void addUser(@RequestParam("rolename") String rolename,

@@ -1,12 +1,13 @@
 package com.joshua.easypass.repository;
 
-import com.joshua.easypass.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+
 public interface RoleRepository extends JpaRepository<Role, Integer> {
+  
     @Query("SELECT r.authlist FROM Role r WHERE r.roleid = :roleid")
     public String findAuthlist(@Param("roleid") Integer roleid);
 
