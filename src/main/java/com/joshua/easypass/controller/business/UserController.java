@@ -87,7 +87,7 @@ public class UserController extends BaseController {
                            @RequestParam("state") String state) {
     	
     	CurrentUserSessionStorage userSession=SessionContextHolder.getCurrentUserSessionStorage();
-        if(userSession.getRoleId()!=null&&userSession.getRoleId()==Contants.sysRole){
+        if(userSession!=null&&userSession.getRoleId()!=null&&userSession.getRoleId()==Contants.sysRole){
     	    return userService.getUsers(username, phone, roleid, ("所有".equals(state)?"":state));
         }else{
         	return userService.getUsersByOwner(username, phone, roleid, ("所有".equals(state)?"":state),userSession.getUserId().intValue());
