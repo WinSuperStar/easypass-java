@@ -32,8 +32,9 @@ public class FileUtils {
 		} else {
 			fileName = UUID.randomUUID().toString().replaceAll("-", "")+RandomStringUtils.randomNumeric(5)+suffix;
 		}
+
 		String toFilePath = mergeFilePath(realPath,FileUtils.getUploadType(fileName),moduleName,DateUtils.currentYear(),DateUtils.currentDate());
-		String toFile = toFilePath+fileName;
+		String toFile = toFilePath+"/"+fileName;
 		try {
 			makeFolder(toFilePath);
             bos = new FileOutputStream(toFile);
@@ -121,9 +122,10 @@ public class FileUtils {
     public static String  mergeFilePath(String ...filePath) {
     	StringBuffer path = new StringBuffer();
     	for(String f :  filePath) {
-    		path.append(f);
-    		if(!f.endsWith("/")){
-    			path.append("/");
+    		if(!f.startsWith("/")) {
+    			path.append("/").append(f);
+    		}else {
+    			path.append(f);
     		}
     	}
     	return path.toString();
