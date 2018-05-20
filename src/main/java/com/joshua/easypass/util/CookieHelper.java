@@ -105,7 +105,7 @@ public class CookieHelper {
 	    try{
 	    	if(StringUtils.isBlank(domain)) {
 	    		domain = new URL(request.getRequestURL().toString()).getHost();
-	    		domain = domain.substring(domain.indexOf("."));
+	    		domain = domain.substring(domain.indexOf(".")+1);
 	    	}
 	    	logger.info("maxAge:"+maxAge+",domain:"+domain);
 			Cookie cookie = new Cookie(name,value);
