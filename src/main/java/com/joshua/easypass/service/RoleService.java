@@ -29,11 +29,16 @@ public class RoleService {
         roleRepo.save(role);
     }
 
-    public String findAuthlist(String rolename) {
-        return roleRepo.findAuthlist(rolename);
+    public String findAuthlist(Integer roleid) {
+        return roleRepo.findAuthlist(roleid);
     }
     @Transactional
     public void updateRole(String rolename, String authlist, Integer roleid) {
         roleRepo.updateRole(rolename, authlist, roleid);
+    }
+    
+    @Transactional
+    public void delRole(Integer id) {
+        roleRepo.deleteById(id);
     }
 }

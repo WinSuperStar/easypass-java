@@ -24,6 +24,7 @@ public class User {
     private String add2;
     private String add3;
     private String rolename;
+    private Integer roleid;
 
     public String getRolename() {
         return rolename;
@@ -156,4 +157,18 @@ public class User {
                 ", rolename='" + rolename + '\'' +
                 '}';
     }
+
+	public Integer getRoleid() {
+		return roleid;
+	}
+
+	public void setRoleid(Integer roleid) {
+		this.roleid = roleid;
+	}
+
+	
+
+	
+    
+    
 }

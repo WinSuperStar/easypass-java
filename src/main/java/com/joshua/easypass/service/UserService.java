@@ -2,6 +2,7 @@ package com.joshua.easypass.service;
 
 import com.joshua.easypass.repository.UserRepository;
 import com.joshua.easypass.entity.User;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,11 @@ public class UserService {
     public User[] getUsers(String username, String phone, String role, String state) {
         logger.info("查询中：用户名为{},手机号码为{}, 岗位为{}, 状态为{}", username, phone, role, state);
         return userRepo.getUsers(username, phone, role, state);
+    }
+    
+    public User[] getUsersByOwner(String username, String phone, String role, String state,Integer userid) {
+        logger.info("查询中：用户名为{},手机号码为{}, 岗位为{}, 状态为{}", username, phone, role, state);
+        return userRepo.getUsersByOwner(username, phone, role, state,userid);
     }
 
     public User[] getAllUsers(){return userRepo.getAllUsers();}

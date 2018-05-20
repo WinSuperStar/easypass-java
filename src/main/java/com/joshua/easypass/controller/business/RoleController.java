@@ -34,7 +34,7 @@ public class RoleController {
     }
 
     @PostMapping(value="/permission")
-    public String findAuthlist(@RequestParam("rolename") String rolename){ return roleService.findAuthlist(rolename); }
+    public String findAuthlist(@RequestParam("roleid") Integer roleid){ return roleService.findAuthlist(roleid); }
 
     @PostMapping(value = "/addRole")
     public void addUser(@RequestParam("rolename") String rolename,
@@ -48,6 +48,11 @@ public class RoleController {
         role.setCreator(creator);
         logger.info("新建职位："+role.toString());
         roleService.addRole(role);
+    }
+    
+    @GetMapping(value = "/delRole/{id}")
+    public void delRole(@PathVariable("id") Integer id){
+    	roleService.delRole(id);
     }
 
 }
