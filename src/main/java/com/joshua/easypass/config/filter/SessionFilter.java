@@ -2,8 +2,6 @@ package com.joshua.easypass.config.filter;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -15,8 +13,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
-
 import com.joshua.easypass.encap.CurrentUserSessionStorage;
 import com.joshua.easypass.entity.Authlist;
 import com.joshua.easypass.util.AuthUtil;
@@ -25,9 +21,9 @@ import com.joshua.easypass.util.AuthUtil;
 public class SessionFilter implements Filter {
 
 	
-	private static final String  NO_AUTHORITY_PAGE = "http://localhost:4200/#/home/tip";
+	private static final String  NO_AUTHORITY_PAGE = "/#/home/tip";
 	
-	private static final String  INDEX_PAGE = "http://localhost:4200/#index";
+	private static final String  INDEX_PAGE = "/#index";
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
