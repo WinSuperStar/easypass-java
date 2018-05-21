@@ -25,6 +25,12 @@ public class ItemdetailService {
         i.setRelatedBillName(billname);
         i.setRelatedItemName(itemname);
         i.setRelatedBillType(billtype);
+        i.setOriSampleVideoPath("");
+        i.setOriSampleImagePath("");
+        i.setOriSampleCertPath("");
+        i.setNewSampleVideoPath("");
+        i.setNewSampleImagePath("");
+        i.setNewSampleCertPath("");
         i = idRepo.saveAndFlush(i);
         return i.getPapid();
     }
