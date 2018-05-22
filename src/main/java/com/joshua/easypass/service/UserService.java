@@ -1,14 +1,23 @@
 package com.joshua.easypass.service;
 
-import com.joshua.easypass.repository.UserRepository;
-import com.joshua.easypass.entity.User;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
+
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import com.joshua.easypass.entity.User;
+import com.joshua.easypass.repository.UserRepository;
 
 @Service
 public class UserService {
@@ -19,12 +28,73 @@ public class UserService {
 
     public User[] getUsers(String username, String phone, Integer roleid, String state) {
         logger.info("查询中：用户名为{},手机号码为{}, 岗位为{}, 状态为{}", username, phone, roleid, state);
-        return userRepo.getUsers(username, phone, roleid, state);
+        
+        List<User> resultList = null;
+        Specification<User> querySpecifi = new Specification<User>() {
+        	
+			private static final long serialVersionUID = 1L;
+
+			@Override
+            public Predicate toPredicate(Root<User> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+
+                List<Predicate> predicates = new ArrayList<>();
+                if(StringUtils.isNotBlank(username)){
+                    predicates.add(criteriaBuilder.like(root.get("username"), "%"+username+"%"));
+                }
+                if(StringUtils.isNotBlank(phone)){
+                    predicates.add(criteriaBuilder.like(root.get("phone"), "%"+phone+"%"));
+                }
+                if(null != roleid){
+                    predicates.add(criteriaBuilder.equal(root.get("roleid"), roleid));
+                }
+                if(StringUtils.isNotBlank(state)){
+                    predicates.add(criteriaBuilder.like(root.get("state"), "%"+state+"%"));
+                }
+                return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+            }
+        };
+        resultList =  this.userRepo.findAll(querySpecifi);
+        if(resultList!=null && !resultList.isEmpty()) {
+        	return resultList.toArray(new User[] {});
+        }
+        return null;
     }
     
     public User[] getUsersByOwner(String username, String phone, Integer roleid, String state,Integer userid) {
         logger.info("查询中：用户名为{},手机号码为{}, 岗位为{}, 状态为{}", username, phone, roleid, state);
-        return userRepo.getUsersByOwner(username, phone, roleid, state,userid);
+        
+        List<User> resultList = null;
+        Specification<User> querySpecifi = new Specification<User>() {
+        	
+			private static final long serialVersionUID = 1L;
+
+			@Override
+            public Predicate toPredicate(Root<User> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+
+                List<Predicate> predicates = new ArrayList<>();
+                if(StringUtils.isNotBlank(username)){
+                    predicates.add(criteriaBuilder.like(root.get("username"), "%"+username+"%"));
+                }
+                if(StringUtils.isNotBlank(phone)){
+                    predicates.add(criteriaBuilder.like(root.get("phone"), "%"+phone+"%"));
+                }
+                if(null != roleid){
+                    predicates.add(criteriaBuilder.equal(root.get("roleid"), roleid));
+                }
+                if(StringUtils.isNotBlank(state)){
+                    predicates.add(criteriaBuilder.like(root.get("state"), "%"+state+"%"));
+                }
+                if(null != userid){
+                    predicates.add(criteriaBuilder.equal(root.get("userid"), userid));
+                }
+                return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+            }
+        };
+        resultList =  this.userRepo.findAll(querySpecifi);
+        if(resultList!=null && !resultList.isEmpty()) {
+        	return resultList.toArray(new User[] {});
+        }
+        return null;
     }
 
     public User[] getAllUsers(){return userRepo.getAllUsers();}
