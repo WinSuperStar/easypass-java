@@ -15,11 +15,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.joshua.easypass.config.filter.SessionFilter;
 import com.joshua.easypass.config.listener.SessionAttributeListener;
 import com.joshua.easypass.config.properties.FileUploadProperties;
+import com.joshua.easypass.interceptor.SessionInterceptor;
 
 @Configuration
 public class WebAppConfig implements WebMvcConfigurer{
@@ -39,34 +41,44 @@ public class WebAppConfig implements WebMvcConfigurer{
     
 
 //    @Bean
-//    public FilterRegistrationBean<SessionFilter> indexFilterRegistration() {
-//        FilterRegistrationBean<SessionFilter> registration = new FilterRegistrationBean<>(new SessionFilter());
-//        registration.addUrlPatterns("/*");
-//        return registration;
+//    public SessionInterceptor sessionInterceptor() {
+//    	return new SessionInterceptor();
 //    }
-//
-//    @Bean
-//    public ServletListenerRegistrationBean<SessionAttributeListener> servletListenerRegistrationBean(){
-//        ServletListenerRegistrationBean<SessionAttributeListener> servletListenerRegistrationBean = new ServletListenerRegistrationBean<SessionAttributeListener>();
-//        servletListenerRegistrationBean.setListener(new SessionAttributeListener());
-//        return servletListenerRegistrationBean;
-//    }
-//
-//
-//    @Bean
-//    public HttpMessageConverter<String> responseBodyConverter() {
-//        StringHttpMessageConverter converter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
-//        return converter;
-//    }
-//
-//
+//    
 //    @Override
-//    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-//        converters.add(responseBodyConverter());
-//    }
-//
-//    @Override
-//    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-//        configurer.favorPathExtension(false);
-//    }
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(sessionInterceptor()).addPathPatterns("/**").excludePathPatterns("/login","/logout","/permission");
+//    } 
+    
+    @Bean
+    public FilterRegistrationBean<SessionFilter> indexFilterRegistration() {
+        FilterRegistrationBean<SessionFilter> registration = new FilterRegistrationBean<>(new SessionFilter());
+        registration.addUrlPatterns("/*");
+        return registration;
+    }
+
+    @Bean
+    public ServletListenerRegistrationBean<SessionAttributeListener> servletListenerRegistrationBean(){
+        ServletListenerRegistrationBean<SessionAttributeListener> servletListenerRegistrationBean = new ServletListenerRegistrationBean<SessionAttributeListener>();
+        servletListenerRegistrationBean.setListener(new SessionAttributeListener());
+        return servletListenerRegistrationBean;
+    }
+
+
+    @Bean
+    public HttpMessageConverter<String> responseBodyConverter() {
+        StringHttpMessageConverter converter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+        return converter;
+    }
+
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(responseBodyConverter());
+    }
+
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer.favorPathExtension(false);
+    }
 }
