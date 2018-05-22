@@ -39,6 +39,7 @@ public class UserService {
     }
     @Transactional
     public void addUser(User user) {
-        userRepo.save(user);
+        userRepo.saveUser(user.getUserid(),user.getUsername(),user.getPassword(),user.getGender(),user.getState(),user.getPhone(),user.getCertpath(),
+                user.getCertnum(),user.getCreatedate(),user.getCreator(),user.getAdd1(),user.getAdd2(),user.getAdd3(), user.getRoleid());
     }
 }

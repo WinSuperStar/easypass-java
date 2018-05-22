@@ -23,8 +23,16 @@ public class User {
 	private String add1;
 	private String add2;
 	private String add3;
-
+	private String rolename;
 	private Integer roleid;
+
+	public String getRolename() {
+		return rolename;
+	}
+
+	public void setRolename(String rolename) {
+		this.rolename = rolename;
+	}
 
 	public Integer getRoleid() {
 		return roleid;
