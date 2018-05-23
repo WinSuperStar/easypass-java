@@ -3,6 +3,8 @@ package com.joshua.easypass.controller.business;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +27,7 @@ import com.joshua.easypass.entity.User;
 import com.joshua.easypass.service.AuthService;
 import com.joshua.easypass.service.RoleService;
 import com.joshua.easypass.service.UserService;
+import com.joshua.easypass.session.SessionIdHolder;
 import com.joshua.easypass.util.AuthUtil;
 import com.joshua.easypass.util.CookieHelper;
 
@@ -53,7 +56,9 @@ public class UserController extends BaseController {
 		if (authids != null && StringUtils.isNotBlank(authids)) {
 			authlist = authService.getAuthlist(authids);
 		}
-    	request.getSession().setAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY, CurrentUserSessionStorage.fromUser(u,authlist));
+		HttpSession session = request.getSession();
+		session.setAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY, CurrentUserSessionStorage.fromUser(u,authlist));
+    	SessionIdHolder.put(String.valueOf(u.getUserid()), session.getId());
     	CookieHelper.setCookie(response, request, "domain", fileUploadProperties.getDefaultDomain());
     	u.setPassword(null);
         return u;
@@ -127,7 +132,7 @@ public class UserController extends BaseController {
         user.setCreator(creator);
         user.setCertpath(certpath);
         logger.info("更新用户："+user.toString());
-        userService.addUser(user);
+        userService.updateUser(user);
     }
 
     @GetMapping(value = "/user/{id}")

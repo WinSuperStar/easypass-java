@@ -13,7 +13,7 @@ spring:
     show-sql: true
 upload:
   open: true
-  base-dir: /data/files/
+  base-dir: E:\data\git\easypass-ui\dist
   max-file-size: 2MB
   max-request-size: 10MB
   default-domain: "http://images.user.xxx.com"

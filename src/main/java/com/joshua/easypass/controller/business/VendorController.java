@@ -1,13 +1,19 @@
 package com.joshua.easypass.controller.business;
 
+import com.joshua.easypass.encap.DataTableResult;
+import com.joshua.easypass.encap.DateTableParameter;
+import com.joshua.easypass.entity.User;
 import com.joshua.easypass.entity.Vendor;
 import com.joshua.easypass.service.VendorService;
 import com.joshua.easypass.util.DataUtil;
 import com.joshua.easypass.util.DateUtil;
+
 import net.sf.json.JSONObject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -210,5 +216,17 @@ public class VendorController {
 //        v.setAdd2(add2);
 //        v.setAdd3(add3);
         vdrService.saveVdr(v);
+    }
+    
+    
+    @PostMapping(value = "/vendorPage")
+    public DataTableResult<Vendor> queryAccessLogPage(DateTableParameter dateTableParameter) {
+    	DataTableResult<Vendor>  dataTableResult = new DataTableResult<Vendor>();
+    	Page<Vendor> dbPageData = vdrService.queryVendorPage(null,dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
+    	dataTableResult.setDraw(dateTableParameter.getDraw());
+    	dataTableResult.setData(dbPageData.getContent());
+    	dataTableResult.setRecordsFiltered(dbPageData.getTotalElements());
+    	dataTableResult.setRecordsTotal(dbPageData.getTotalElements());
+        return dataTableResult;
     }
 }

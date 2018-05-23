@@ -1,13 +1,19 @@
 package com.joshua.easypass.service;
 
 import com.joshua.easypass.entity.Authlist;
+import com.joshua.easypass.entity.User;
 import com.joshua.easypass.entity.Vendor;
 import com.joshua.easypass.repository.AuthlistRepository;
 import com.joshua.easypass.repository.VendorRepository;
 import com.joshua.easypass.util.DataUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -56,4 +62,12 @@ public class VendorService {
     public Vendor getVdr(Integer vdrid){
         return vdrRepo.getVdr(vdrid);
     }
+    
+    
+    public Page<Vendor> queryVendorPage(Vendor vendor,int currentPageIndex, int pageSize) {
+		Sort sort = new Sort(Sort.Direction.DESC,"vdrid");
+		Pageable pageable = PageRequest.of(currentPageIndex,pageSize,sort);
+    	return vdrRepo.findAll(pageable);
+	}    
+    
 }

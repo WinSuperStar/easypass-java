@@ -13,8 +13,11 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.joshua.easypass.encap.CurrentUserSessionStorage;
 import com.joshua.easypass.entity.Authlist;
+import com.joshua.easypass.session.SessionIdHolder;
 import com.joshua.easypass.util.AuthUtil;
 
 @WebFilter(urlPatterns = "/*", filterName = "sessionFilter")
@@ -38,22 +41,37 @@ public class SessionFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 		String servletPath = request.getServletPath();
 		if (servletPath.endsWith("/login") || servletPath.endsWith("/logout")
-			||servletPath.endsWith("permission")) {
+			||servletPath.endsWith("/permission")
+			||servletPath.endsWith("/province")
+			||servletPath.endsWith("/city")
+			||servletPath.endsWith("/area")
+			||servletPath.endsWith("/authname")
+			||servletPath.endsWith("/authlist")) {
 			filterChain.doFilter(servletRequest, servletResponse);
 		} else {
 			CurrentUserSessionStorage currentUserSessionStorage = (CurrentUserSessionStorage) request.getSession().getAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY);
 			if (currentUserSessionStorage != null&&currentUserSessionStorage.getUserId()!=null&&currentUserSessionStorage.getUserId()!=0) {
 				// 重新设值session
 				request.getSession().setAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY,currentUserSessionStorage);
-				List<Authlist> authList = currentUserSessionStorage.getAuthList();
-				boolean flag =AuthUtil.hasAuthByAuthUrl(authList, servletPath);
-				if(flag){
-					filterChain.doFilter(servletRequest, servletResponse);
-				}else{
-					response.sendRedirect(NO_AUTHORITY_PAGE);
+				String currentVisitSessionId = request.getSession().getId();
+				String currentVisitUserId =  String.valueOf(currentUserSessionStorage.getUserId());
+				String loginSessionId = SessionIdHolder.get(currentVisitUserId);
+				if(StringUtils.isNotBlank(loginSessionId)&&loginSessionId.equals(currentVisitSessionId)) {
+					List<Authlist> authList = currentUserSessionStorage.getAuthList();
+					boolean flag =AuthUtil.hasAuthByAuthUrl(authList, servletPath);
+					if(flag){
+						filterChain.doFilter(servletRequest, servletResponse);
+					}else{
+						response.sendRedirect(NO_AUTHORITY_PAGE);
+						return;
+					}
+				}else {
+					response.sendRedirect(INDEX_PAGE);
+					return;
 				}
 			} else {
 				response.sendRedirect(INDEX_PAGE);
+				return;
 			}
 		}
 	}
