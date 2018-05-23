@@ -129,7 +129,7 @@ public class UserController extends BaseController {
         user.setCreator(creator);
         user.setCertpath(certpath);
         logger.info("更新用户："+user.toString());
-        userService.addUser(user);
+        userService.updateUser(user);
     }
 
     @GetMapping(value = "/user/{id}")

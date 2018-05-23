@@ -2,6 +2,7 @@ package com.joshua.easypass.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -17,6 +18,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.joshua.easypass.entity.User;
+import com.joshua.easypass.repository.RoleRepository;
 import com.joshua.easypass.repository.UserRepository;
 
 @Service
@@ -25,6 +27,10 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepo;
+    
+    @Autowired
+    private RoleRepository roleRepo;   
+    
 
     public User[] getUsers(String username, String phone, Integer roleid, String state) {
         logger.info("查询中：用户名为{},手机号码为{}, 岗位为{}, 状态为{}", username, phone, roleid, state);
@@ -107,9 +113,28 @@ public class UserService {
         logger.info("登录中，用户名为{}， 密码为{}", username, password);
         return userRepo.find(username, password);
     }
+    
     @Transactional
     public void addUser(User user) {
         userRepo.saveUser(user.getUserid(),user.getUsername(),user.getPassword(),user.getGender(),user.getState(),user.getPhone(),user.getCertpath(),
                 user.getCertnum(),user.getCreatedate(),user.getCreator(),user.getAdd1(),user.getAdd2(),user.getAdd3(), user.getRoleid());
     }
+    
+    @Transactional
+	public void updateUser(User user) {
+		Optional<User> userDb = userRepo.findById(user.getUserid());
+		User u = userDb.get();
+		u.setAdd1(user.getAdd1());
+		u.setAdd2(user.getAdd2());
+		u.setAdd3(user.getAdd3());
+		u.setCertnum(user.getCertnum());
+		u.setCertpath(user.getCertpath());
+		u.setGender(user.getGender());
+		u.setPhone(user.getPhone());
+		u.setPassword(user.getPassword());
+		u.setRoleid(user.getRoleid());
+		u.setRolename(roleRepo.getRole(user.getRoleid()).getRolename());
+		u.setState(user.getState());
+		userRepo.save(u);
+	}
 }

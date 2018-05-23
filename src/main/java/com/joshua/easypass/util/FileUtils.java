@@ -46,7 +46,7 @@ public class FileUtils {
             bos.close();
             stream.close();
             
-            uploadResult.setRelativeStorePath(mergeFilePath(FileUtils.getUploadType(fileName),moduleName,fileName));
+            uploadResult.setRelativeStorePath(mergeFilePath(FileUtils.getUploadType(fileName),moduleName,DateUtils.currentYear(),DateUtils.currentDate(),fileName));
             result.setCode(RESULT_SUCESS);
             result.setData(uploadResult);
 		} catch(IOException e) {
