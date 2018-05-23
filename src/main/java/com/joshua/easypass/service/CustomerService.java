@@ -1,13 +1,18 @@
 package com.joshua.easypass.service;
 
-import com.joshua.easypass.entity.Customer;
-import com.joshua.easypass.repository.CustomerRepository;
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import com.joshua.easypass.entity.Customer;
+import com.joshua.easypass.repository.CustomerRepository;
 
 @Service
 public class CustomerService {
@@ -32,4 +37,10 @@ public class CustomerService {
     public void addCus(Customer cus) {
         cusRepo.save(cus);
     }
+    
+    public Page<Customer> queryCustomerPage(Customer cus,int currentPageIndex, int pageSize) {
+		Sort sort = new Sort(Sort.Direction.DESC,"cusid");
+		Pageable pageable = PageRequest.of(currentPageIndex,pageSize,sort);
+    	return cusRepo.findAll(pageable);
+	}    
 }

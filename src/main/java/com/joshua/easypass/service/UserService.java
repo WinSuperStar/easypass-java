@@ -1,11 +1,16 @@
 package com.joshua.easypass.service;
 
 import com.joshua.easypass.repository.UserRepository;
+import com.joshua.easypass.entity.AccessLog;
 import com.joshua.easypass.entity.User;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -41,4 +46,11 @@ public class UserService {
     public void addUser(User user) {
         userRepo.save(user);
     }
+    
+    
+    public Page<User> queryUserPage(User user,int currentPageIndex, int pageSize) {
+		Sort sort = new Sort(Sort.Direction.DESC,"userid");
+		Pageable pageable = PageRequest.of(currentPageIndex,pageSize,sort);
+    	return userRepo.findAll(pageable);
+	}    
 }
