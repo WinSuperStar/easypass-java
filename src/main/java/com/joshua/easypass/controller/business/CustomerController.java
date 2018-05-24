@@ -1,10 +1,15 @@
 package com.joshua.easypass.controller.business;
 
+import com.joshua.easypass.encap.DataTableResult;
+import com.joshua.easypass.encap.DateTableParameter;
 import com.joshua.easypass.entity.Customer;
+import com.joshua.easypass.entity.User;
 import com.joshua.easypass.service.CustomerService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -81,5 +86,17 @@ public class CustomerController {
         cus.setCreator(creator);
         logger.info("新建客户：" + cus.toString());
         cusService.addCus(cus);
+    }
+    
+    
+    @PostMapping(value = "/cusPage")
+    public DataTableResult<Customer> queryAccessLogPage(DateTableParameter dateTableParameter) {
+    	DataTableResult<Customer>  dataTableResult = new DataTableResult<Customer>();
+    	Page<Customer> dbPageData = cusService.queryCustomerPage(null,dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
+    	dataTableResult.setDraw(dateTableParameter.getDraw());
+    	dataTableResult.setData(dbPageData.getContent());
+    	dataTableResult.setRecordsFiltered(dbPageData.getTotalElements());
+    	dataTableResult.setRecordsTotal(dbPageData.getTotalElements());
+        return dataTableResult;
     }
 }

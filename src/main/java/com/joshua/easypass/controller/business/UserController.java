@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.joshua.easypass.controller.BaseController;
 import com.joshua.easypass.encap.CurrentUserSessionStorage;
+import com.joshua.easypass.encap.DataTableResult;
+import com.joshua.easypass.encap.DateTableParameter;
 import com.joshua.easypass.entity.Authlist;
 import com.joshua.easypass.entity.User;
 import com.joshua.easypass.service.AuthService;
@@ -146,4 +149,15 @@ public class UserController extends BaseController {
 //    public void addUser(@Valid User user, BindingResult bingdingResult){
 //
 //    }
+    
+    @PostMapping(value = "/userPage")
+    public DataTableResult<User> queryAccessLogPage(DateTableParameter dateTableParameter) {
+    	DataTableResult<User>  dataTableResult = new DataTableResult<User>();
+    	Page<User> dbPageData = userService.queryUserPage(null,dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
+    	dataTableResult.setDraw(dateTableParameter.getDraw());
+    	dataTableResult.setData(dbPageData.getContent());
+    	dataTableResult.setRecordsFiltered(dbPageData.getTotalElements());
+    	dataTableResult.setRecordsTotal(dbPageData.getTotalElements());
+        return dataTableResult;
+    }
 }

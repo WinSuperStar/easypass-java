@@ -14,6 +14,10 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -120,6 +124,14 @@ public class UserService {
                 user.getCertnum(),user.getCreatedate(),user.getCreator(),user.getAdd1(),user.getAdd2(),user.getAdd3(), user.getRoleid());
     }
     
+
+    
+    public Page<User> queryUserPage(User user,int currentPageIndex, int pageSize) {
+		Sort sort = new Sort(Sort.Direction.DESC,"userid");
+		Pageable pageable = PageRequest.of(currentPageIndex,pageSize,sort);
+    	return userRepo.findAll(pageable);
+	}    
+
     @Transactional
 	public void updateUser(User user) {
 		Optional<User> userDb = userRepo.findById(user.getUserid());

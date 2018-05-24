@@ -43,7 +43,12 @@ public class SessionFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 		String servletPath = request.getServletPath();
 		if (servletPath.endsWith("/login") || servletPath.endsWith("/logout")
-			||servletPath.endsWith("permission")) {
+			||servletPath.endsWith("/permission")
+			||servletPath.endsWith("/province")
+			||servletPath.endsWith("/city")
+			||servletPath.endsWith("/area")
+			||servletPath.endsWith("/authname")
+			||servletPath.endsWith("/authlist")) {
 			filterChain.doFilter(servletRequest, servletResponse);
 		} else {
 			CurrentUserSessionStorage currentUserSessionStorage = (CurrentUserSessionStorage) request.getSession().getAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY);
