@@ -56,8 +56,10 @@ public class UserController extends BaseController {
 		if (authids != null && StringUtils.isNotBlank(authids)) {
 			authlist = authService.getAuthlist(authids);
 		}
+		Authlist[]   allAuthlist = null;
+		allAuthlist=authService.getAllAuth();
 		HttpSession session = request.getSession();
-		session.setAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY, CurrentUserSessionStorage.fromUser(u,authlist));
+		session.setAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY, CurrentUserSessionStorage.fromUser(u,authlist,allAuthlist));
     	SessionIdHolder.put(String.valueOf(u.getUserid()), session.getId());
     	u.setPassword(null);
         return u;
@@ -148,7 +150,7 @@ public class UserController extends BaseController {
 //    public void addUser(@Valid User user, BindingResult bingdingResult){
 //
 //    }
-    
+
     @PostMapping(value = "/users")
     public DataTableResult<User> queryUserPage(User user, DateTableParameter dateTableParameter) {
     	DataTableResult<User>  dataTableResult = new DataTableResult<User>();
@@ -175,7 +177,6 @@ public class UserController extends BaseController {
         	}
         	return null;
         }
-
         return dataTableResult;
     }
 }

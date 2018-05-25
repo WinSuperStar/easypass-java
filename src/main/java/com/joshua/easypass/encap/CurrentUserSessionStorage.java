@@ -27,6 +27,8 @@ public class CurrentUserSessionStorage implements Serializable{
 	private Integer roleId;
 	
 	private List<Authlist> authList;
+	
+	private Authlist[] allAuthList;
 
 	public Long getUserId() {
 		return userId;
@@ -76,13 +78,14 @@ public class CurrentUserSessionStorage implements Serializable{
 		this.phone = phone;
 	}
 
-	public static CurrentUserSessionStorage fromUser(User user ,List<Authlist> authList) {
+	public static CurrentUserSessionStorage fromUser(User user ,List<Authlist> authList,Authlist[]  allAuthList) {
 		CurrentUserSessionStorage currentUserSessionStore = new CurrentUserSessionStorage();
 		currentUserSessionStore.setUserId(Long.valueOf(user.getUserid()));
 		currentUserSessionStore.setUserName(user.getUsername());
 		currentUserSessionStore.setPhone(user.getPhone());
 		currentUserSessionStore.setRoleId(user.getRoleid());
 		currentUserSessionStore.setAuthList(authList);
+		currentUserSessionStore.setAllAuthList(allAuthList);;
 		return currentUserSessionStore;
 	}
 
@@ -100,6 +103,15 @@ public class CurrentUserSessionStorage implements Serializable{
 
 	public void setAuthList(List<Authlist> authList) {
 		this.authList = authList;
+	}
+
+
+	public Authlist[] getAllAuthList() {
+		return allAuthList;
+	}
+
+	public void setAllAuthList(Authlist[] allAuthList) {
+		this.allAuthList = allAuthList;
 	}
 
 	@Override

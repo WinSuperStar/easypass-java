@@ -11,7 +11,8 @@ import org.springframework.data.repository.query.Param;
 import com.joshua.easypass.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecificationExecutor<User>  {
-    @Query("SELECT u FROM User u WHERE u.username = :username AND u.password = :password and u.state = '激活'")
+
+    @Query("SELECT u FROM User u WHERE u.username = :username AND u.password = :password AND u.state = '激活'")
     public User find(@Param("username") String username, @Param("password") String password);
 
     @Query("SELECT u FROM User u WHERE u.username like %:username% AND u.phone like %:phone% AND u.roleid =:roleid AND u.state like %:state% ")

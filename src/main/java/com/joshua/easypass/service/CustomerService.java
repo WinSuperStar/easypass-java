@@ -28,9 +28,9 @@ public class CustomerService {
         return cusRepo.getCustomer(cusid);
     }
 
-    public Customer[] getCustomers(String cusname, String cusmode, String contact, String contactPhone) {
-        logger.info("查询中：客户名为{},客户模式为{}, 联系人为{}, 联系人电话为{}", cusname, cusmode, contact, contactPhone);
-        return cusRepo.getCustomers(cusname, cusmode, contact, contactPhone);
+    public Customer[] getCustomers(String cusname, String cusmode, String contact, String contactPhone, String state) {
+        logger.info("查询中：客户名为{},客户模式为{}, 联系人为{}, 联系人电话为{}, 状态为{}", cusname, cusmode, contact, contactPhone, state);
+        return cusRepo.getCustomers(cusname, cusmode, contact, contactPhone, state);
     }
 
     @Transactional

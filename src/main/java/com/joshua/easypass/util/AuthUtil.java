@@ -10,9 +10,26 @@ import com.joshua.easypass.entity.Authlist;
 
 public class AuthUtil {
 
-	public static boolean hasAuthByAuthUrl(List<Authlist> authList,String servletPath){
+	public static boolean hasAuthByAuthUrl(Authlist[]  allAuthList,List<Authlist> authList,String servletPath){
+		boolean flag=true;
+		Pattern pattern = null;
+		if (allAuthList == null || allAuthList.length == 0) {
+			return  true;
+		}
+		for(Authlist auth:allAuthList) {
+			if(StringUtils.isNotBlank(auth.getAuthUrl())){
+					pattern = Pattern.compile(auth.getAuthUrl());
+					Matcher matcher = pattern.matcher(servletPath);
+					if(matcher.matches()) {
+						flag=false;
+					}
+			}
+		}
+		if(flag){
+			return true;
+		}
 		if (authList != null && !authList.isEmpty()) {
-			Pattern pattern = null;
+			
 			for(Authlist auth:authList) {
 				if(StringUtils.isNotBlank(auth.getAuthUrl())){
 					pattern = Pattern.compile(auth.getAuthUrl());

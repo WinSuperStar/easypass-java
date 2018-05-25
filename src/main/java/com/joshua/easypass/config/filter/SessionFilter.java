@@ -25,11 +25,6 @@ import com.joshua.easypass.util.ResultUtil;
 @WebFilter(urlPatterns = "/*", filterName = "sessionFilter")
 public class SessionFilter implements Filter {
 
-	
-	private static final String  NO_AUTHORITY_PAGE = "/#/home/tip";
-	
-	private static final String  INDEX_PAGE = "/#index";
-
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		
@@ -60,7 +55,8 @@ public class SessionFilter implements Filter {
 				String loginSessionId = SessionIdHolder.get(currentVisitUserId);
 				if(StringUtils.isNotBlank(loginSessionId)&&loginSessionId.equals(currentVisitSessionId)) {
 					List<Authlist> authList = currentUserSessionStorage.getAuthList();
-					boolean flag =AuthUtil.hasAuthByAuthUrl(authList, servletPath);
+					Authlist[]  allAuthlist=currentUserSessionStorage.getAllAuthList();
+					boolean flag =AuthUtil.hasAuthByAuthUrl(allAuthlist,authList, servletPath);
 					if(flag){
 						filterChain.doFilter(servletRequest, servletResponse);
 					}else{
