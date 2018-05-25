@@ -22,8 +22,10 @@ public class AuthUtil {
 					Matcher matcher = pattern.matcher(servletPath);
 					if(matcher.matches()) {
 						flag=false;
+						break;
 					}
 			}
+			continue;
 		}
 		if(flag){
 			return true;
