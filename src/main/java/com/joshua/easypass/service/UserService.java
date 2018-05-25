@@ -127,9 +127,38 @@ public class UserService {
 
     
     public Page<User> queryUserPage(User user,int currentPageIndex, int pageSize) {
-		Sort sort = new Sort(Sort.Direction.DESC,"userid");
+    	Sort sort = new Sort(Sort.Direction.DESC,"userid");
 		Pageable pageable = PageRequest.of(currentPageIndex,pageSize,sort);
-    	return userRepo.findAll(pageable);
+		
+           Specification<User> querySpecifi = new Specification<User>() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -2366110178681043472L;
+
+			@Override
+            public Predicate toPredicate(Root<User> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+
+                List<Predicate> predicates = new ArrayList<>();
+                if(StringUtils.isNotBlank(user.getUsername())){
+                    predicates.add(criteriaBuilder.like(root.get("username"), "%"+user.getUsername()+"%"));
+                }
+                if(StringUtils.isNotBlank(user.getPhone())){
+                    predicates.add(criteriaBuilder.like(root.get("phone"), "%"+user.getPhone()+"%"));
+                }
+                if(null != user.getRoleid()){
+                    predicates.add(criteriaBuilder.equal(root.get("roleid"), user.getRoleid()));
+                }
+                if(StringUtils.isNotBlank(user.getState())){
+                    predicates.add(criteriaBuilder.like(root.get("state"), "%"+user.getState()+"%"));
+                }
+                if(null != user.getUserid()){
+                    predicates.add(criteriaBuilder.equal(root.get("userid"), user.getUserid()));
+                }
+                return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+            }
+        };
+    	return userRepo.findAll(querySpecifi,pageable); 
 	}    
 
     @Transactional

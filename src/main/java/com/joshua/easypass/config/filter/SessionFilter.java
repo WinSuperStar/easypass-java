@@ -58,7 +58,8 @@ public class SessionFilter implements Filter {
 				String loginSessionId = SessionIdHolder.get(currentVisitUserId);
 				if(StringUtils.isNotBlank(loginSessionId)&&loginSessionId.equals(currentVisitSessionId)) {
 					List<Authlist> authList = currentUserSessionStorage.getAuthList();
-					boolean flag =AuthUtil.hasAuthByAuthUrl(authList, servletPath);
+					Authlist[]  allAuthlist=currentUserSessionStorage.getAllAuthList();
+					boolean flag =AuthUtil.hasAuthByAuthUrl(allAuthlist,authList, servletPath);
 					if(flag){
 						filterChain.doFilter(servletRequest, servletResponse);
 					}else{

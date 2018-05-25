@@ -56,8 +56,10 @@ public class UserController extends BaseController {
 		if (authids != null && StringUtils.isNotBlank(authids)) {
 			authlist = authService.getAuthlist(authids);
 		}
+		Authlist[]   allAuthlist = null;
+		allAuthlist=authService.getAllAuth();
 		HttpSession session = request.getSession();
-		session.setAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY, CurrentUserSessionStorage.fromUser(u,authlist));
+		session.setAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY, CurrentUserSessionStorage.fromUser(u,authlist,allAuthlist));
     	SessionIdHolder.put(String.valueOf(u.getUserid()), session.getId());
     	CookieHelper.setCookie(response, request, "domain", fileUploadProperties.getDefaultDomain());
     	u.setPassword(null);
@@ -151,9 +153,9 @@ public class UserController extends BaseController {
 //    }
     
     @PostMapping(value = "/userPage")
-    public DataTableResult<User> queryAccessLogPage(DateTableParameter dateTableParameter) {
+    public DataTableResult<User> queryAccessLogPage(User user,DateTableParameter dateTableParameter) {
     	DataTableResult<User>  dataTableResult = new DataTableResult<User>();
-    	Page<User> dbPageData = userService.queryUserPage(null,dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
+    	Page<User> dbPageData = userService.queryUserPage(user,dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
     	dataTableResult.setDraw(dateTableParameter.getDraw());
     	dataTableResult.setData(dbPageData.getContent());
     	dataTableResult.setRecordsFiltered(dbPageData.getTotalElements());
