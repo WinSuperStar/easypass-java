@@ -40,7 +40,8 @@ public class CustomerController {
                           @RequestParam("address") String address,
                           @RequestParam("state") String state,
                           @RequestParam("createdate") String createdate,
-                          @RequestParam("creator") String creator) {
+                          @RequestParam("creator") String creator,
+                          @RequestParam("add1") String add1) {
         Date currentTime = new Date();
         Customer cus = new Customer();
         cus.setCusid(cusid);
@@ -52,6 +53,7 @@ public class CustomerController {
         cus.setState(state);
         cus.setCreatedate(currentTime);
         cus.setCreator(creator);
+        cus.setAdd1(add1);
         logger.info("更新客户：" + cus.toString());
         cusService.addCus(cus);
     }
@@ -74,7 +76,8 @@ public class CustomerController {
                        @RequestParam("cusmode") String cusmode,
                        @RequestParam("address") String address,
                        @RequestParam("state") String state,
-                       @RequestParam("creator") String creator) {
+                       @RequestParam("creator") String creator,
+                       @RequestParam("add1") String add1) {
         Date currentTime = new Date();
         Customer cus = new Customer();
         cus.setCusname(cusname);
@@ -85,6 +88,7 @@ public class CustomerController {
         cus.setState(state);
         cus.setCreatedate(currentTime);
         cus.setCreator(creator);
+        cus.setAdd1(add1);
         logger.info("新建客户：" + cus.toString());
         cusService.addCus(cus);
     }
