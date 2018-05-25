@@ -2,12 +2,23 @@ package com.joshua.easypass.repository;
 
 import com.joshua.easypass.entity.Vendor;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 
-public interface VendorRepository extends JpaRepository<Vendor, Integer> {
+public interface VendorRepository extends JpaRepository<Vendor, Integer>, JpaSpecificationExecutor<Vendor> {
+    @Modifying
+    @Query(value="UPDATE Vendor v SET v.state = '已提交' WHERE v.vdrid = :vdrid", nativeQuery = true)
+    public Vendor smtVdr(@Param("vdrid") Integer vdrid);
+
+    @Modifying
+    @Query(value="DELETE FROM Vendor v WHERE v.vdrid = :vdrid", nativeQuery = true)
+    public Vendor delVdr(@Param("vdrid") Integer vdrid);
+
+
     @Query("SELECT v FROM Vendor v WHERE v.vdrid = :vdrid")
     public Vendor getVdr(@Param("vdrid") Integer vdrid);
 

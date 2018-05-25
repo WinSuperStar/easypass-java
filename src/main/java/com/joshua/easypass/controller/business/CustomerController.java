@@ -60,10 +60,11 @@ public class CustomerController {
     public Customer[] getCus(@RequestParam("cusname") String cusname,
                              @RequestParam("cusmode") String cusmode,
                              @RequestParam("contact") String contact,
-                             @RequestParam("contactPhone") String contactPhone
+                             @RequestParam("contactPhone") String contactPhone,
+                             @RequestParam("state") String state
     ) {
 
-        return cusService.getCustomers(cusname, ("全部".equals(cusmode) ? "" : cusmode), contact, contactPhone);
+        return cusService.getCustomers(cusname, ("全部".equals(cusmode) ? "" : cusmode), contact, contactPhone, state);
     }
 
     @PostMapping(value = "/addCus")

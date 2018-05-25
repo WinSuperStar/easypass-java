@@ -19,6 +19,8 @@ import com.joshua.easypass.encap.CurrentUserSessionStorage;
 import com.joshua.easypass.entity.Authlist;
 import com.joshua.easypass.session.SessionIdHolder;
 import com.joshua.easypass.util.AuthUtil;
+import com.joshua.easypass.util.ResponseUtil;
+import com.joshua.easypass.util.ResultUtil;
 
 @WebFilter(urlPatterns = "/*", filterName = "sessionFilter")
 public class SessionFilter implements Filter {
@@ -63,15 +65,18 @@ public class SessionFilter implements Filter {
 					if(flag){
 						filterChain.doFilter(servletRequest, servletResponse);
 					}else{
-						response.sendRedirect(NO_AUTHORITY_PAGE);
+						//response.sendRedirect(NO_AUTHORITY_PAGE);
+						ResponseUtil.write(response, ResultUtil.fail(403, "你没有权限访问此页面!"));
 						return;
 					}
 				}else {
-					response.sendRedirect(INDEX_PAGE);
+					//response.sendRedirect(INDEX_PAGE);
+					ResponseUtil.write(response, ResultUtil.fail(401, "此账户在其他地方登陆，请稍后再试!"));
 					return;
 				}
 			} else {
-				response.sendRedirect(INDEX_PAGE);
+				//response.sendRedirect(INDEX_PAGE);
+				ResponseUtil.write(response, ResultUtil.fail(401, "登陆超时，请重新登陆!"));
 				return;
 			}
 		}

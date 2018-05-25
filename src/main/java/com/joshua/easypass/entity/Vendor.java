@@ -677,4 +677,83 @@ public class Vendor {
     public void setAdd3(String add3) {
         this.add3 = add3;
     }
+
+    @Override
+    public String toString() {
+        return "Vendor{" +
+                "vdrid=" + vdrid +
+                ", vdrname='" + vdrname + '\'' +
+                ", vdraddr='" + vdraddr + '\'' +
+                ", vdraddrdetail='" + vdraddrdetail + '\'' +
+                ", vdrplate='" + vdrplate + '\'' +
+                ", contact='" + contact + '\'' +
+                ", contactphone='" + contactphone + '\'' +
+                ", contacts='" + contacts + '\'' +
+                ", itemTidang='" + itemTidang + '\'' +
+                ", itemTidangTax=" + itemTidangTax +
+                ", itemTidangCost=" + itemTidangCost +
+                ", itemTidangCompletedate=" + itemTidangCompletedate +
+                ", itemTidangDesc='" + itemTidangDesc + '\'' +
+                ", itemTidangReqId=" + itemTidangReqId +
+                ", itemGuohu='" + itemGuohu + '\'' +
+                ", itemGuohuTax=" + itemGuohuTax +
+                ", itemGuohuCost=" + itemGuohuCost +
+                ", itemGuohuCompletedate=" + itemGuohuCompletedate +
+                ", itemGuohuDesc='" + itemGuohuDesc + '\'' +
+                ", itemGuohuReqId=" + itemGuohuReqId +
+                ", itemShangpai='" + itemShangpai + '\'' +
+                ", itemShangpaiTax=" + itemShangpaiTax +
+                ", itemShangpaiCost=" + itemShangpaiCost +
+                ", itemShangpaiCompletedate=" + itemShangpaiCompletedate +
+                ", itemShangpaiDesc='" + itemShangpaiDesc + '\'' +
+                ", itemShangpaiReqId=" + itemShangpaiReqId +
+                ", itemWeizhang='" + itemWeizhang + '\'' +
+                ", itemWeizhangTax=" + itemWeizhangTax +
+                ", itemWeizhangCost=" + itemWeizhangCost +
+                ", itemWeizhangCost2=" + itemWeizhangCost2 +
+                ", itemWeizhangCompletedate=" + itemWeizhangCompletedate +
+                ", itemWeizhangDesc='" + itemWeizhangDesc + '\'' +
+                ", itemWeizhangReqId=" + itemWeizhangReqId +
+                ", itemDiya='" + itemDiya + '\'' +
+                ", itemDiyaCost=" + itemDiyaCost +
+                ", itemDiyaCompletedate=" + itemDiyaCompletedate +
+                ", itemDiyaDesc='" + itemDiyaDesc + '\'' +
+                ", itemDiyaReqId=" + itemDiyaReqId +
+                ", itemJiechudiya='" + itemJiechudiya + '\'' +
+                ", itemJiechudiyaCost=" + itemJiechudiyaCost +
+                ", itemJiechudiyaCompletedate=" + itemJiechudiyaCompletedate +
+                ", itemJiechudiyaDesc='" + itemJiechudiyaDesc + '\'' +
+                ", itemJiechudiyaReqId=" + itemJiechudiyaReqId +
+                ", itemWeituo='" + itemWeituo + '\'' +
+                ", itemWeituoTax=" + itemWeituoTax +
+                ", itemWeituoCost=" + itemWeituoCost +
+                ", itemWeituoCompletedate=" + itemWeituoCompletedate +
+                ", itemWeituoDesc='" + itemWeituoDesc + '\'' +
+                ", itemWeituoReqId=" + itemWeituoReqId +
+                ", itemNianjian='" + itemNianjian + '\'' +
+                ", itemNianjianTax=" + itemNianjianTax +
+                ", itemNianjianCost=" + itemNianjianCost +
+                ", itemNianjianCompletedate=" + itemNianjianCompletedate +
+                ", itemNianjianDesc='" + itemNianjianDesc + '\'' +
+                ", itemNianjianReqId=" + itemNianjianReqId +
+                ", itemBuhuan='" + itemBuhuan + '\'' +
+                ", itemBuhuanTax=" + itemBuhuanTax +
+                ", itemBuhuanCost=" + itemBuhuanCost +
+                ", itemBuhuanCompletedate=" + itemBuhuanCompletedate +
+                ", itemBuhuanDesc='" + itemBuhuanDesc + '\'' +
+                ", itemBuhuanReqId=" + itemBuhuanReqId +
+                ", itemQita='" + itemQita + '\'' +
+                ", itemQitaCost=" + itemQitaCost +
+                ", itemQitaCompletedate=" + itemQitaCompletedate +
+                ", itemQitaDesc='" + itemQitaDesc + '\'' +
+                ", itemQitaReqId=" + itemQitaReqId +
+                ", state='" + state + '\'' +
+                ", commitdate=" + commitdate +
+                ", createdate=" + createdate +
+                ", creator='" + creator + '\'' +
+                ", add1='" + add1 + '\'' +
+                ", add2='" + add2 + '\'' +
+                ", add3='" + add3 + '\'' +
+                '}';
+    }
 }

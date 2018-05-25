@@ -2,14 +2,18 @@ package com.joshua.easypass.repository;
 
 import com.joshua.easypass.entity.Presale;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Date;
-
-public interface PresaleRepository extends JpaRepository<Presale, Integer> {
+public interface PresaleRepository extends JpaRepository<Presale, Integer>, JpaSpecificationExecutor<Presale> {
     @Query("SELECT p FROM Presale p WHERE p.saleid = :saleid")
     public Presale getPresale(@Param("saleid") Integer saleid);
+
+    @Modifying
+    @Query(value="DELETE FROM Presale p WHERE p.saleid = :saleid", nativeQuery = true)
+    public void delPresale(@Param("saleid") Integer saleid);
 
 
     @Query(value = "SELECT v.* FROM Presale v WHERE v.caraddr LIKE %?1% AND v.carplate LIKE %?2%" +

@@ -2,8 +2,6 @@ package com.joshua.easypass.controller.business;
 
 import com.joshua.easypass.entity.Presale;
 import com.joshua.easypass.service.PresaleService;
-import com.joshua.easypass.util.DataUtil;
-import com.joshua.easypass.util.DateUtil;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +20,13 @@ public class PresaleController {
     @Autowired
     private PresaleService pService;
 
+    @PostMapping(value = "/delPresale")
+    public void delPresale(@RequestParam("saleid") Integer saleid) {
+        logger.info("接收到删除请求："+saleid);
+        pService.delPresale(saleid);
+    }
+
+
     @PostMapping(value = "/getPresales")
     public Presale[] getVdrs(@RequestParam("caraddr1") String caraddr1,
                              @RequestParam("caraddr2") String caraddr2,
@@ -34,9 +39,7 @@ public class PresaleController {
                              @RequestParam("itemlist") String itemlist
     ) {
 
-        String[] a = DataUtil.VdrSearchTrim(itemlist.split(","));
-        return pService.getPresales(caraddr1, caraddr2, caraddr3, carplate1, carplate2, "全部".equals(cusmode)?"":cusmode, cusname, "全部".equals(state)?"":state,
-                a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8], a[9]);
+        return pService.getPresales(caraddr1, caraddr2, caraddr3, carplate1, carplate2, "全部".equals(cusmode) ? "" : cusmode, cusname, "全部".equals(state) ? "" : state, itemlist);
 
     }
 
