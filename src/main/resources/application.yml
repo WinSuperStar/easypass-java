@@ -8,8 +8,7 @@ spring:
     password: 1234
   jpa:
     hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.MySQL57InnoDBDialect
+      ddl-auto: validate
     show-sql: true
 upload:
   open: true

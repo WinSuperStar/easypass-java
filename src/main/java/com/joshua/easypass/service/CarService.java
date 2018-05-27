@@ -19,6 +19,8 @@ public class CarService {
     @Autowired
     private CarinfoRepository carinfoRepo;
 
+    public Car[] getCarsByNum(String carnum){return carRepo.getCarsByNum(carnum);}
+
     public List<String> getBrand(){
         return carinfoRepo.getBrand();
     }

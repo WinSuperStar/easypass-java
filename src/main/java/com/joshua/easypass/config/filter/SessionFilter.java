@@ -43,7 +43,8 @@ public class SessionFilter implements Filter {
 			||servletPath.endsWith("/city")
 			||servletPath.endsWith("/area")
 			||servletPath.endsWith("/authname")
-			||servletPath.endsWith("/authlist")) {
+			||servletPath.endsWith("/authlist")
+			||servletPath.endsWith("/allCars")) {
 			filterChain.doFilter(servletRequest, servletResponse);
 		} else {
 			CurrentUserSessionStorage currentUserSessionStorage = (CurrentUserSessionStorage) request.getSession().getAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY);
