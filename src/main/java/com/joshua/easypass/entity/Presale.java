@@ -15,6 +15,7 @@ public class Presale {
     private String carplate;
     private String cusname;
     private String cusmode;
+    private Integer vdrid;
     private String vdrname;
     private String vdraddr;
     private String vdraddrdetail;
@@ -90,6 +91,7 @@ public class Presale {
     private Date itemQitaCompletedate;
     private String itemQitaDesc;
     private Integer itemQitaReqId;
+    private float salesum;
     private String state;
     private Date commitdate;
     private Date createdate;
@@ -97,6 +99,22 @@ public class Presale {
     private String add1;
     private String add2;
     private String add3;
+
+    public float getSalesum() {
+        return salesum;
+    }
+
+    public void setSalesum(float salesum) {
+        this.salesum = salesum;
+    }
+
+    public Integer getVdrid() {
+        return vdrid;
+    }
+
+    public void setVdrid(Integer vdrid) {
+        this.vdrid = vdrid;
+    }
 
     public float getItemWeizhangCost2() {
         return itemWeizhangCost2;

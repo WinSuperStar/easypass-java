@@ -15,6 +15,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,10 +26,13 @@ public class PresaleService {
 
     @Autowired
     private PresaleRepository pRepo;
-
+    @Transactional
     public void delPresale(Integer saleid){
         pRepo.delPresale(saleid);
     }
+
+    @Transactional
+    public void updatePresaleState(String state, Integer saleid){pRepo.updatePresaleState(state, saleid);}
 
     public Presale[] getPresales(String vdraddr1, String vdraddr2, String vdraddr3, String vdrplate1, String vdrplate2, String cusmode, String cusname, String state, String itemlist) {
 

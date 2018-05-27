@@ -20,6 +20,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,11 +31,11 @@ public class VendorService {
 
     @Autowired
     private VendorRepository vdrRepo;
-
+    @Transactional
     public void smtVdr(Integer vdrid){
         vdrRepo.smtVdr(vdrid);
     }
-
+    @Transactional
     public void delVdr(Integer vdrid){
         vdrRepo.delVdr(vdrid);
     }

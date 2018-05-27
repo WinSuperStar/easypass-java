@@ -15,6 +15,10 @@ public interface PresaleRepository extends JpaRepository<Presale, Integer>, JpaS
     @Query(value="DELETE FROM Presale p WHERE p.saleid = :saleid", nativeQuery = true)
     public void delPresale(@Param("saleid") Integer saleid);
 
+    @Modifying
+    @Query(value="UPDATE Presale p SET p.state = :state WHERE p.saleid = :saleid", nativeQuery = true)
+    public void updatePresaleState(@Param("state") String state, @Param("saleid") Integer saleid);
+
 
     @Query(value = "SELECT v.* FROM Presale v WHERE v.caraddr LIKE %?1% AND v.carplate LIKE %?2%" +
             " AND v.cusmode LIKE %?3% AND v.cusname LIKE %?4%" +

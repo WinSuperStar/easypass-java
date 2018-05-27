@@ -75,7 +75,6 @@ public class HttpAspect {
 
     @After("log()")
     public void doAfter(){
-        logger.info("After 222222");
         // 获取返回的值
     }
 

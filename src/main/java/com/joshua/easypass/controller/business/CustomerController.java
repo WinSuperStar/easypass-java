@@ -26,6 +26,11 @@ public class CustomerController {
         return cusService.getAllCustomers();
     }
 
+    @PostMapping(value = "/customersByMode")
+    public Customer[] getCustomersByMode(@RequestParam("cusmode") String cusmode) {
+        return cusService.getCustomersByMode(cusmode);
+    }
+
     @GetMapping(value = "/customer/{id}")
     public Customer getCustomer(@PathVariable("id") Integer id) {
         return cusService.getCustomer(id);

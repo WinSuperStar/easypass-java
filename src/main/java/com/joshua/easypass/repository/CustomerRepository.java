@@ -4,10 +4,14 @@ import com.joshua.easypass.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.PostMapping;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     @Query("SELECT c FROM Customer c")
     public Customer[] getAllCustomers();
+
+    @Query("SELECT c FROM Customer c WHERE c.cusmode = :cusmode")
+    public Customer[] getCustomersByMode(@Param("cusmode") String cusmode);
 
     @Query("SELECT c FROM Customer c WHERE c.cusid = :cusid")
     public Customer getCustomer(@Param("cusid") Integer cusid);

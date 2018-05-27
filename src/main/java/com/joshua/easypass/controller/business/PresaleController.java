@@ -26,6 +26,11 @@ public class PresaleController {
         pService.delPresale(saleid);
     }
 
+    @PostMapping(value="/updatePresaleState")
+    public void updatePresaleState(@RequestParam("state") String state,
+                                   @RequestParam("saleid") Integer saleid){
+        pService.updatePresaleState(state,saleid);
+    }
 
     @PostMapping(value = "/getPresales")
     public Presale[] getVdrs(@RequestParam("caraddr1") String caraddr1,

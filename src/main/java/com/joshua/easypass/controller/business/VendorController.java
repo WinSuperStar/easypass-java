@@ -72,8 +72,18 @@ public class VendorController {
     ) {
         JSONObject jasonV = JSONObject.fromObject(vendor);
         logger.info("转成的jason对象为：" + jasonV);
-
         Vendor v = (Vendor) JSONObject.toBean(jasonV, Vendor.class);
+        v.setItemTidangCompletedate("".equals(jasonV.get("itemTidangCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemTidangCompletedate")+""));
+        v.setItemGuohuCompletedate("".equals(jasonV.get("itemGuohuCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemGuohuCompletedate")+""));
+        v.setItemShangpaiCompletedate("".equals(jasonV.get("itemShangpaiCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemShangpaiCompletedate")+""));
+        v.setItemWeizhangCompletedate("".equals(jasonV.get("itemWeizhangCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemWeizhangCompletedate")+""));
+        v.setItemDiyaCompletedate("".equals(jasonV.get("itemDiyaCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemDiyaCompletedate")+""));
+        v.setItemJiechudiyaCompletedate("".equals(jasonV.get("itemJiechudiyaCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemJiechudiyaCompletedate")+""));
+        v.setItemWeituoCompletedate("".equals(jasonV.get("itemWeituoCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemWeituoCompletedate")+""));
+        v.setItemNianjianCompletedate("".equals(jasonV.get("itemNianjianCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemNianjianCompletedate")+""));
+        v.setItemBuhuanCompletedate("".equals(jasonV.get("itemBuhuanCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemBuhuanCompletedate")+""));
+        v.setItemQitaCompletedate("".equals(jasonV.get("itemQitaCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemQitaCompletedate")+""));
+        logger.info(v.toString());
         vdrService.saveVdr(v);
     }
 

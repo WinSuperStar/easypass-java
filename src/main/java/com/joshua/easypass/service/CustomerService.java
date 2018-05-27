@@ -20,6 +20,8 @@ public class CustomerService {
     @Autowired
     private CustomerRepository cusRepo;
 
+    public Customer[] getCustomersByMode(String cusmode){return cusRepo.getCustomersByMode(cusmode);}
+
     public Customer[] getAllCustomers() {
         return cusRepo.getAllCustomers();
     }
