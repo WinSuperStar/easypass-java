@@ -29,7 +29,6 @@ import com.joshua.easypass.service.RoleService;
 import com.joshua.easypass.service.UserService;
 import com.joshua.easypass.session.SessionIdHolder;
 import com.joshua.easypass.util.AuthUtil;
-import com.joshua.easypass.util.CookieHelper;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")

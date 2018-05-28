@@ -1,18 +1,23 @@
 package com.joshua.easypass.controller.business;
 
-import com.joshua.easypass.encap.DataTableResult;
-import com.joshua.easypass.encap.DateTableParameter;
-import com.joshua.easypass.entity.Customer;
-import com.joshua.easypass.entity.User;
-import com.joshua.easypass.service.CustomerService;
+import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
+import com.joshua.easypass.encap.DataTableResult;
+import com.joshua.easypass.encap.DateTableParameter;
+import com.joshua.easypass.entity.Customer;
+import com.joshua.easypass.service.CustomerService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
@@ -64,14 +69,28 @@ public class CustomerController {
     }
 
     @PostMapping(value = "/customers")
-    public Customer[] getCus(@RequestParam("cusname") String cusname,
+    public DataTableResult<Customer> getCus(@RequestParam("cusname") String cusname,
                              @RequestParam("cusmode") String cusmode,
                              @RequestParam("contact") String contact,
                              @RequestParam("contactPhone") String contactPhone,
-                             @RequestParam("state") String state
+                             @RequestParam("state") String state,
+                             DateTableParameter dateTableParameter
     ) {
-
-        return cusService.getCustomers(cusname, ("全部".equals(cusmode) ? "" : cusmode), contact, contactPhone, state);
+    	DataTableResult<Customer>  dataTableResult = new DataTableResult<Customer>();
+    	Page<Customer> dbPageData  = null;
+    	Customer  cus=new Customer();
+    	cus.setCusname(cusname);
+    	cus.setCusmode(cusmode);
+    	cus.setContact(contact);
+    	cus.setContactPhone(contactPhone);
+    	cus.setState(state);
+    	dbPageData = cusService.queryCusPage(cus,dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
+    	dataTableResult.setDraw(dateTableParameter.getDraw());
+    	dataTableResult.setData(dbPageData.getContent());
+    	dataTableResult.setRecordsFiltered(dbPageData.getTotalElements());
+    	dataTableResult.setRecordsTotal(dbPageData.getTotalElements());
+        //return cusService.getCustomers(cusname, ("全部".equals(cusmode) ? "" : cusmode), contact, contactPhone, state);
+        return dataTableResult;
     }
 
     @PostMapping(value = "/addCus")
@@ -99,7 +118,7 @@ public class CustomerController {
     }
     
     
-    @PostMapping(value = "/cusPage")
+   /* @PostMapping(value = "/cusPage")
     public DataTableResult<Customer> queryAccessLogPage(DateTableParameter dateTableParameter) {
     	DataTableResult<Customer>  dataTableResult = new DataTableResult<Customer>();
     	Page<Customer> dbPageData = cusService.queryCustomerPage(null,dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
@@ -108,5 +127,5 @@ public class CustomerController {
     	dataTableResult.setRecordsFiltered(dbPageData.getTotalElements());
     	dataTableResult.setRecordsTotal(dbPageData.getTotalElements());
         return dataTableResult;
-    }
+    }*/
 }
