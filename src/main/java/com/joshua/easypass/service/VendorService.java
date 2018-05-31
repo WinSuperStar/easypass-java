@@ -81,37 +81,37 @@ public class VendorService {
                       predicates.add(criteriaBuilder.like(root.get("state"), "%" + state + "%"));
                   }
                   if (StringUtils.isNotBlank(itemlist)) {
-                      predicates.add(criteriaBuilder.like(root.get("state"), "%" + state + "%"));
-                  }
-                  if (StringUtils.isNotBlank(a[0].trim())) {
-                      predicates.add(criteriaBuilder.equal(root.get("itemTidang"), "%" + a[0] + "%"));
-                  }
-                  if (StringUtils.isNotBlank(a[1].trim())) {
-                      predicates.add(criteriaBuilder.equal(root.get("itemGuohu"), "%" + a[1] + "%"));
-                  }
-                  if (StringUtils.isNotBlank(a[2].trim())) {
-                      predicates.add(criteriaBuilder.equal(root.get("itemShangpai"), "%" + a[2] + "%"));
-                  }
-                  if (StringUtils.isNotBlank(a[3].trim())) {
-                      predicates.add(criteriaBuilder.equal(root.get("itemWeizhang"), "%" + a[3] + "%"));
-                  }
-                  if (StringUtils.isNotBlank(a[4].trim())) {
-                      predicates.add(criteriaBuilder.equal(root.get("itemDiya"), "%" + a[4] + "%"));
-                  }
-                  if (StringUtils.isNotBlank(a[5].trim())) {
-                      predicates.add(criteriaBuilder.equal(root.get("itemJiechudiya"), "%" + a[5] + "%"));
-                  }
-                  if (StringUtils.isNotBlank(a[6].trim())) {
-                      predicates.add(criteriaBuilder.equal(root.get("itemWeituo"), "%" + a[6] + "%"));
-                  }
-                  if (StringUtils.isNotBlank(a[7].trim())) {
-                      predicates.add(criteriaBuilder.equal(root.get("itemNianjian"), "%" + a[7] + "%"));
-                  }
-                  if (StringUtils.isNotBlank(a[8].trim())) {
-                      predicates.add(criteriaBuilder.equal(root.get("itemBuhuan"), "%" + a[8] + "%"));
-                  }
-                  if (StringUtils.isNotBlank(a[9].trim())) {
-                      predicates.add(criteriaBuilder.equal(root.get("itemQita"), "%" + a[9] + "%"));
+                  
+		                  if (StringUtils.isNotBlank(a[0].trim())) {
+		                      predicates.add(criteriaBuilder.equal(root.get("itemTidang"), "%" + a[0] + "%"));
+		                  }
+		                  if (StringUtils.isNotBlank(a[1].trim())) {
+		                      predicates.add(criteriaBuilder.equal(root.get("itemGuohu"), "%" + a[1] + "%"));
+		                  }
+		                  if (StringUtils.isNotBlank(a[2].trim())) {
+		                      predicates.add(criteriaBuilder.equal(root.get("itemShangpai"), "%" + a[2] + "%"));
+		                  }
+		                  if (StringUtils.isNotBlank(a[3].trim())) {
+		                      predicates.add(criteriaBuilder.equal(root.get("itemWeizhang"), "%" + a[3] + "%"));
+		                  }
+		                  if (StringUtils.isNotBlank(a[4].trim())) {
+		                      predicates.add(criteriaBuilder.equal(root.get("itemDiya"), "%" + a[4] + "%"));
+		                  }
+		                  if (StringUtils.isNotBlank(a[5].trim())) {
+		                      predicates.add(criteriaBuilder.equal(root.get("itemJiechudiya"), "%" + a[5] + "%"));
+		                  }
+		                  if (StringUtils.isNotBlank(a[6].trim())) {
+		                      predicates.add(criteriaBuilder.equal(root.get("itemWeituo"), "%" + a[6] + "%"));
+		                  }
+		                  if (StringUtils.isNotBlank(a[7].trim())) {
+		                      predicates.add(criteriaBuilder.equal(root.get("itemNianjian"), "%" + a[7] + "%"));
+		                  }
+		                  if (StringUtils.isNotBlank(a[8].trim())) {
+		                      predicates.add(criteriaBuilder.equal(root.get("itemBuhuan"), "%" + a[8] + "%"));
+		                  }
+		                  if (StringUtils.isNotBlank(a[9].trim())) {
+		                      predicates.add(criteriaBuilder.equal(root.get("itemQita"), "%" + a[9] + "%"));
+		                  }
                   }
                   return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
               }

@@ -19,10 +19,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.joshua.easypass.entity.Customer;
-import com.joshua.easypass.entity.User;
 import com.joshua.easypass.repository.CustomerRepository;
 
 @Service
@@ -74,7 +72,7 @@ public class CustomerService {
 			                predicates.add(criteriaBuilder.like(root.get("cusmode"), "%"+cus.getCusmode()+"%"));
 			            }
 			            if(StringUtils.isNotBlank(cus.getContact())){
-			                predicates.add(criteriaBuilder.equal(root.get("concat"), cus.getContact()));
+			                predicates.add(criteriaBuilder.equal(root.get("contact"), cus.getContact()));
 			            }
 			            if(StringUtils.isNotBlank(cus.getState())){
 			                predicates.add(criteriaBuilder.like(root.get("state"), "%"+cus.getState()+"%"));
