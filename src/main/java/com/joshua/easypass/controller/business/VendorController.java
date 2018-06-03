@@ -1,22 +1,22 @@
 package com.joshua.easypass.controller.business;
 
-import com.joshua.easypass.encap.DataTableResult;
-import com.joshua.easypass.encap.DateTableParameter;
-import com.joshua.easypass.entity.User;
-import com.joshua.easypass.entity.Vendor;
-import com.joshua.easypass.service.VendorService;
-import com.joshua.easypass.util.DataUtil;
-import com.joshua.easypass.util.DateUtil;
-
 import net.sf.json.JSONObject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
+import com.joshua.easypass.encap.DataTableResult;
+import com.joshua.easypass.encap.DateTableParameter;
+import com.joshua.easypass.entity.Vendor;
+import com.joshua.easypass.service.VendorService;
+import com.joshua.easypass.util.DateUtil;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
@@ -51,7 +51,7 @@ public class VendorController {
     }
 
     @PostMapping(value = "/getVdrs")
-    public Vendor[] getVdrs(@RequestParam("vdraddr1") String vdraddr1,
+    public DataTableResult<Vendor> getVdrs(@RequestParam("vdraddr1") String vdraddr1,
                             @RequestParam("vdraddr2") String vdraddr2,
                             @RequestParam("vdraddr3") String vdraddr3,
                             @RequestParam("vdrplate1") String vdrplate1,
@@ -60,10 +60,19 @@ public class VendorController {
                             @RequestParam("contactphone") String contactphone,
                             @RequestParam("firstdate") String firstdate,
                             @RequestParam("state") String state,
-                            @RequestParam("itemlist") String itemlist
+                            @RequestParam("itemlist") String itemlist,
+                            DateTableParameter dateTableParameter
     ) {
 
-        return vdrService.getVdrs(vdraddr1, vdraddr2, vdraddr3, vdrplate1, vdrplate2, contact, contactphone, firstdate, state, itemlist);
+    	
+    	DataTableResult<Vendor>  dataTableResult = new DataTableResult<Vendor>();
+    	Page<Vendor> dbPageData  = null;
+    	dbPageData = vdrService.queryVdrPage(vdraddr1, vdraddr2, vdraddr3, vdrplate1, vdrplate2, contact, contactphone, firstdate, state, itemlist,dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
+    	dataTableResult.setDraw(dateTableParameter.getDraw());
+    	dataTableResult.setData(dbPageData.getContent());
+    	dataTableResult.setRecordsFiltered(dbPageData.getTotalElements());
+    	dataTableResult.setRecordsTotal(dbPageData.getTotalElements());
+        return dataTableResult;
     }
 
     @PostMapping(value = "/saveVdr")
@@ -88,6 +97,7 @@ public class VendorController {
     }
 
 
+<<<<<<< HEAD
 //    @PostMapping(value = "/vendorPage")
 //    public DataTableResult<Vendor> queryAccessLogPage(DateTableParameter dateTableParameter) {
 //        DataTableResult<Vendor> dataTableResult = new DataTableResult<Vendor>();
@@ -98,4 +108,7 @@ public class VendorController {
 //        dataTableResult.setRecordsTotal(dbPageData.getTotalElements());
 //        return dataTableResult;
 //    }
+=======
+   
+>>>>>>> 343a7d34b11a726407886fd0e4e48f855baae507
 }
