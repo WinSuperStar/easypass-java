@@ -69,29 +69,39 @@ public class CustomerController {
     }
 
     @PostMapping(value = "/customers")
-    public DataTableResult<Customer> getCus(@RequestParam("cusname") String cusname,
+    public Customer[] getCus(@RequestParam("cusname") String cusname,
                              @RequestParam("cusmode") String cusmode,
                              @RequestParam("contact") String contact,
                              @RequestParam("contactPhone") String contactPhone,
-                             @RequestParam("state") String state,
-                             DateTableParameter dateTableParameter
+                             @RequestParam("state") String state
     ) {
-    	DataTableResult<Customer>  dataTableResult = new DataTableResult<Customer>();
-    	Page<Customer> dbPageData  = null;
-    	Customer  cus=new Customer();
-    	cus.setCusname(cusname);
-    	cus.setCusmode(cusmode);
-    	cus.setContact(contact);
-    	cus.setContactPhone(contactPhone);
-    	cus.setState(state);
-    	dbPageData = cusService.queryCusPage(cus,dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
-    	dataTableResult.setDraw(dateTableParameter.getDraw());
-    	dataTableResult.setData(dbPageData.getContent());
-    	dataTableResult.setRecordsFiltered(dbPageData.getTotalElements());
-    	dataTableResult.setRecordsTotal(dbPageData.getTotalElements());
-        //return cusService.getCustomers(cusname, ("全部".equals(cusmode) ? "" : cusmode), contact, contactPhone, state);
-        return dataTableResult;
+        return cusService.getCustomers(cusname, cusmode, contact, contactPhone, state);
     }
+
+//    @PostMapping(value = "/customers")
+//    public DataTableResult<Customer> getCus(@RequestParam("cusname") String cusname,
+//                                            @RequestParam("cusmode") String cusmode,
+//                                            @RequestParam("contact") String contact,
+//                                            @RequestParam("contactPhone") String contactPhone,
+//                                            @RequestParam("state") String state,
+//                                            DateTableParameter dateTableParameter
+//    ) {
+//        DataTableResult<Customer> dataTableResult = new DataTableResult<Customer>();
+//        Page<Customer> dbPageData = null;
+//        Customer cus = new Customer();
+//        cus.setCusname(cusname);
+//        cus.setCusmode(cusmode);
+//        cus.setContact(contact);
+//        cus.setContactPhone(contactPhone);
+//        cus.setState(state);
+//        dbPageData = cusService.queryCusPage(cus, dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
+//        dataTableResult.setDraw(dateTableParameter.getDraw());
+//        dataTableResult.setData(dbPageData.getContent());
+//        dataTableResult.setRecordsFiltered(dbPageData.getTotalElements());
+//        dataTableResult.setRecordsTotal(dbPageData.getTotalElements());
+//        //return cusService.getCustomers(cusname, ("全部".equals(cusmode) ? "" : cusmode), contact, contactPhone, state);
+//        return dataTableResult;
+//    }
 
     @PostMapping(value = "/addCus")
     public void addCus(@RequestParam("cusname") String cusname,
