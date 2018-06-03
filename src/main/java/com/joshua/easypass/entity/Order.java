@@ -22,7 +22,7 @@ public class Order {
     private String cusname;
     private String carAddr;
     private String carPlateCode;
-    private String carPlateNumber;
+    private String carPlateNum;
     private Integer vdrid;
     private String vdrContact;
     private String oriOwnerName;
@@ -31,7 +31,6 @@ public class Order {
     private String newOwnerPhone;
     private Date itemDeadline;
     private Date itemPlanDate;
-
     private String weizhangStatus;
     private String weizhangHandle;
     private String weizhangDesc;
@@ -43,7 +42,7 @@ public class Order {
     private String diyaDesc;
     private String paizhengStatus;
     private String paizhengHandle;
-    private String paizhengHDesc;
+    private String paizhengDesc;
     private float qitaCost;
     private String qitaDesc;
     private String cheliangcailiao;
@@ -58,7 +57,6 @@ public class Order {
     private float kuaidiCost;
     private String kuaidiImgPath;
     private String kuaidiSets;
-
     // tidang
     private String itemTidang;
     private float itemTidangTax;
@@ -126,7 +124,6 @@ public class Order {
     private Date itemQitaCompletedate;
     private String itemQitaDesc;
     private Integer itemQitaReqId;
-
     private String state;
     private String financeState;
     private float financeSum;
@@ -233,12 +230,12 @@ public class Order {
         this.carPlateCode = carPlateCode;
     }
 
-    public String getCarPlateNumber() {
-        return carPlateNumber;
+    public String getCarPlateNum() {
+        return carPlateNum;
     }
 
-    public void setCarPlateNumber(String carPlateNumber) {
-        this.carPlateNumber = carPlateNumber;
+    public void setCarPlateNum(String carPlateNum) {
+        this.carPlateNum = carPlateNum;
     }
 
     public Integer getVdrid() {
@@ -393,12 +390,12 @@ public class Order {
         this.paizhengHandle = paizhengHandle;
     }
 
-    public String getPaizhengHDesc() {
-        return paizhengHDesc;
+    public String getPaizhengDesc() {
+        return paizhengDesc;
     }
 
-    public void setPaizhengHDesc(String paizhengHDesc) {
-        this.paizhengHDesc = paizhengHDesc;
+    public void setPaizhengDesc(String paizhengDesc) {
+        this.paizhengDesc = paizhengDesc;
     }
 
     public float getQitaCost() {
@@ -1039,5 +1036,124 @@ public class Order {
 
     public void setAdd3(String add3) {
         this.add3 = add3;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderid=" + orderid +
+                ", carid=" + carid +
+                ", carnum='" + carnum + '\'' +
+                ", carRegDate=" + carRegDate +
+                ", carbrand='" + carbrand + '\'' +
+                ", carset='" + carset + '\'' +
+                ", carRegImgPath='" + carRegImgPath + '\'' +
+                ", carOtherCertPath='" + carOtherCertPath + '\'' +
+                ", cusid=" + cusid +
+                ", cusname='" + cusname + '\'' +
+                ", carAddr='" + carAddr + '\'' +
+                ", carPlateCode='" + carPlateCode + '\'' +
+                ", carPlateNum='" + carPlateNum + '\'' +
+                ", vdrid=" + vdrid +
+                ", vdrContact='" + vdrContact + '\'' +
+                ", oriOwnerName='" + oriOwnerName + '\'' +
+                ", oriOwnerPhone='" + oriOwnerPhone + '\'' +
+                ", newOwnerName='" + newOwnerName + '\'' +
+                ", newOwnerPhone='" + newOwnerPhone + '\'' +
+                ", itemDeadline=" + itemDeadline +
+                ", itemPlanDate=" + itemPlanDate +
+                ", weizhangStatus='" + weizhangStatus + '\'' +
+                ", weizhangHandle='" + weizhangHandle + '\'' +
+                ", weizhangDesc='" + weizhangDesc + '\'' +
+                ", nianjianStatus='" + nianjianStatus + '\'' +
+                ", nianjianHandle='" + nianjianHandle + '\'' +
+                ", nianjianDesc='" + nianjianDesc + '\'' +
+                ", diyaStatus='" + diyaStatus + '\'' +
+                ", diyaHandle='" + diyaHandle + '\'' +
+                ", diyaDesc='" + diyaDesc + '\'' +
+                ", paizhengStatus='" + paizhengStatus + '\'' +
+                ", paizhengHandle='" + paizhengHandle + '\'' +
+                ", paizhengDesc='" + paizhengDesc + '\'' +
+                ", qitaCost=" + qitaCost +
+                ", qitaDesc='" + qitaDesc + '\'' +
+                ", cheliangcailiao='" + cheliangcailiao + '\'' +
+                ", cheliangdengjizhengjian='" + cheliangdengjizhengjian + '\'' +
+                ", xingshizheng='" + xingshizheng + '\'' +
+                ", gongzhang='" + gongzhang + '\'' +
+                ", oriShenfenzheng='" + oriShenfenzheng + '\'' +
+                ", oriJuzhuzheng='" + oriJuzhuzheng + '\'' +
+                ", yingyezhizhao='" + yingyezhizhao + '\'' +
+                ", qitaxinxi='" + qitaxinxi + '\'' +
+                ", kuaidiNum='" + kuaidiNum + '\'' +
+                ", kuaidiCost=" + kuaidiCost +
+                ", kuaidiImgPath='" + kuaidiImgPath + '\'' +
+                ", kuaidiSets='" + kuaidiSets + '\'' +
+                ", itemTidang='" + itemTidang + '\'' +
+                ", itemTidangTax=" + itemTidangTax +
+                ", itemTidangCost=" + itemTidangCost +
+                ", itemTidangCompletedate=" + itemTidangCompletedate +
+                ", itemTidangDesc='" + itemTidangDesc + '\'' +
+                ", itemTidangReqId=" + itemTidangReqId +
+                ", itemGuohu='" + itemGuohu + '\'' +
+                ", itemGuohuTax=" + itemGuohuTax +
+                ", itemGuohuCost=" + itemGuohuCost +
+                ", itemGuohuCompletedate=" + itemGuohuCompletedate +
+                ", itemGuohuDesc='" + itemGuohuDesc + '\'' +
+                ", itemGuohuReqId=" + itemGuohuReqId +
+                ", itemShangpai='" + itemShangpai + '\'' +
+                ", itemShangpaiTax=" + itemShangpaiTax +
+                ", itemShangpaiCost=" + itemShangpaiCost +
+                ", itemShangpaiCompletedate=" + itemShangpaiCompletedate +
+                ", itemShangpaiDesc='" + itemShangpaiDesc + '\'' +
+                ", itemShangpaiReqId=" + itemShangpaiReqId +
+                ", itemWeizhang='" + itemWeizhang + '\'' +
+                ", itemWeizhangCost=" + itemWeizhangCost +
+                ", itemWeizhangCost2=" + itemWeizhangCost2 +
+                ", itemWeizhangCompletedate=" + itemWeizhangCompletedate +
+                ", itemWeizhangDesc='" + itemWeizhangDesc + '\'' +
+                ", itemWeizhangReqId=" + itemWeizhangReqId +
+                ", itemDiya='" + itemDiya + '\'' +
+                ", itemDiyaCost=" + itemDiyaCost +
+                ", itemDiyaCompletedate=" + itemDiyaCompletedate +
+                ", itemDiyaDesc='" + itemDiyaDesc + '\'' +
+                ", itemDiyaReqId=" + itemDiyaReqId +
+                ", itemJiechudiya='" + itemJiechudiya + '\'' +
+                ", itemJiechudiyaCost=" + itemJiechudiyaCost +
+                ", itemJiechudiyaCompletedate=" + itemJiechudiyaCompletedate +
+                ", itemJiechudiyaDesc='" + itemJiechudiyaDesc + '\'' +
+                ", itemJiechudiyaReqId=" + itemJiechudiyaReqId +
+                ", itemWeituo='" + itemWeituo + '\'' +
+                ", itemWeituoTax=" + itemWeituoTax +
+                ", itemWeituoCost=" + itemWeituoCost +
+                ", itemWeituoCompletedate=" + itemWeituoCompletedate +
+                ", itemWeituoDesc='" + itemWeituoDesc + '\'' +
+                ", itemWeituoReqId=" + itemWeituoReqId +
+                ", itemNianjian='" + itemNianjian + '\'' +
+                ", itemNianjianTax=" + itemNianjianTax +
+                ", itemNianjianCost=" + itemNianjianCost +
+                ", itemNianjianCompletedate=" + itemNianjianCompletedate +
+                ", itemNianjianDesc='" + itemNianjianDesc + '\'' +
+                ", itemNianjianReqId=" + itemNianjianReqId +
+                ", itemBuhuan='" + itemBuhuan + '\'' +
+                ", itemBuhuanTax=" + itemBuhuanTax +
+                ", itemBuhuanCost=" + itemBuhuanCost +
+                ", itemBuhuanCompletedate=" + itemBuhuanCompletedate +
+                ", itemBuhuanDesc='" + itemBuhuanDesc + '\'' +
+                ", itemBuhuanReqId=" + itemBuhuanReqId +
+                ", itemQita='" + itemQita + '\'' +
+                ", itemQitaCost=" + itemQitaCost +
+                ", itemQitaCompletedate=" + itemQitaCompletedate +
+                ", itemQitaDesc='" + itemQitaDesc + '\'' +
+                ", itemQitaReqId=" + itemQitaReqId +
+                ", state='" + state + '\'' +
+                ", financeState='" + financeState + '\'' +
+                ", financeSum=" + financeSum +
+                ", commitdate=" + commitdate +
+                ", createdate=" + createdate +
+                ", creator='" + creator + '\'' +
+                ", add1='" + add1 + '\'' +
+                ", add2='" + add2 + '\'' +
+                ", add3='" + add3 + '\'' +
+                '}';
     }
 }

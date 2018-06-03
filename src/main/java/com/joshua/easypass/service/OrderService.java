@@ -5,8 +5,11 @@ import com.joshua.easypass.repository.OrderRepository;
 import com.joshua.easypass.util.DataUtil;
 import com.joshua.easypass.util.DateUtil;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -16,10 +19,32 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class OrderService {
+    public final static Logger logger = LoggerFactory.getLogger(OrderService.class);
 
     @Autowired
     private OrderRepository odrRepo;
+
+    public Integer createOdr(String creator) {
+        Order order = new Order();
+        order.setCreatedate(new Date());
+        order.setItemDeadline(DateUtil.autoComDate());
+        order.setCreator(creator);
+        order.setState("未提交");
+        order.setFinanceState("未提交");
+        logger.info(order.toString());
+        order = odrRepo.saveAndFlush(order);
+        return  order.getOrderid();
+    }
+
+    public Order getOdr(Integer orderid){
+        return odrRepo.getOdr(orderid);
+    }
+
+    public void saveOdr(Order order) {
+        odrRepo.save(order);
+    }
 
     public Order[] getOdrs(String orderid, String plateCode, String plateNum, String oriOwnerName, String carbrand, String carset, String carnum, String cusname,
                            String kuaidiNum, String state, String itemlist, String creator) {
@@ -31,7 +56,7 @@ public class OrderService {
         Specification<Order> querySpecifi = new Specification<Order>() {
 
             private static final long serialVersionUID = 1L;
-//            String addr = vdraddr1 + ("".equals(vdraddr2) ? "" : (" " + vdraddr2)) + ("".equals(vdraddr3) ? "" : (" " + vdraddr3));
+            //            String addr = vdraddr1 + ("".equals(vdraddr2) ? "" : (" " + vdraddr2)) + ("".equals(vdraddr3) ? "" : (" " + vdraddr3));
 //            String vdrplate = vdrplate1 + ("".equals(vdrplate2) ? "" : (" " + vdrplate2));
             String[] a = DataUtil.VdrSearchTrim(itemlist.split(","));
 

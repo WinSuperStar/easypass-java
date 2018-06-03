@@ -26,13 +26,16 @@ public class PresaleService {
 
     @Autowired
     private PresaleRepository pRepo;
+
     @Transactional
-    public void delPresale(Integer saleid){
+    public void delPresale(Integer saleid) {
         pRepo.delPresale(saleid);
     }
 
     @Transactional
-    public void updatePresaleState(String state, Integer saleid){pRepo.updatePresaleState(state, saleid);}
+    public void updatePresaleState(String state, Integer saleid) {
+        pRepo.updatePresaleState(state, saleid);
+    }
 
     public Presale[] getPresales(String vdraddr1, String vdraddr2, String vdraddr3, String vdrplate1, String vdrplate2, String cusmode, String cusname, String state, String itemlist) {
 
@@ -68,34 +71,34 @@ public class PresaleService {
                     predicates.add(criteriaBuilder.like(root.get("state"), "%" + state + "%"));
                 }
                 if (StringUtils.isNotBlank(a[0].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemTidang"), "%" + a[0] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemTidang"), a[0]));
                 }
                 if (StringUtils.isNotBlank(a[1].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemGuohu"), "%" + a[1] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemGuohu"), a[1]));
                 }
                 if (StringUtils.isNotBlank(a[2].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemShangpai"), "%" + a[2] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemShangpai"), a[2]));
                 }
                 if (StringUtils.isNotBlank(a[3].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemWeizhang"), "%" + a[3] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemWeizhang"), a[3]));
                 }
                 if (StringUtils.isNotBlank(a[4].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemDiya"), "%" + a[4] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemDiya"), a[4]));
                 }
                 if (StringUtils.isNotBlank(a[5].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemJiechudiya"), "%" + a[5] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemJiechudiya"), a[5]));
                 }
                 if (StringUtils.isNotBlank(a[6].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemWeituo"), "%" + a[6] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemWeituo"), a[6]));
                 }
                 if (StringUtils.isNotBlank(a[7].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemNianjian"), "%" + a[7] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemNianjian"), a[7]));
                 }
                 if (StringUtils.isNotBlank(a[8].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemBuhuan"), "%" + a[8] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemBuhuan"), a[8]));
                 }
                 if (StringUtils.isNotBlank(a[9].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemQita"), "%" + a[9] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemQita"), a[9]));
                 }
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }

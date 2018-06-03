@@ -89,25 +89,25 @@ public class UserController extends BaseController {
         userService.addUser(user);
     }
 
-//    @PostMapping(value = "/users")
-//    public User[] getUsers(@RequestParam("username") String username,
-//                           @RequestParam("phone") String phone,
-//                           @RequestParam("roleid") Integer roleid,
-//                           @RequestParam("state") String state) {
-//    	
-//    	CurrentUserSessionStorage userSession=(CurrentUserSessionStorage)request.getSession().getAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY);
-//    	boolean flag =AuthUtil.hasAuthByAuthData(userSession.getAuthList(), "QUERY_USERS_ALL");
-//        if(flag){
-//    	    return userService.getUsers(username, phone, roleid, ("所有".equals(state)?"":state));
-//        }else {
-//        	flag =AuthUtil.hasAuthByAuthData(userSession.getAuthList(), "QUERY_USERS_BY_OWNER");
-//        	if(flag){
-//        	   return userService.getUsersByOwner(username, phone, roleid, ("所有".equals(state)?"":state),userSession.getUserId().intValue());
-//        	}
-//        	   return  null;
-//        }
-//       
-//    }
+    @PostMapping(value = "/users")
+    public User[] getUsers(@RequestParam("username") String username,
+                           @RequestParam("phone") String phone,
+                           @RequestParam("roleid") Integer roleid,
+                           @RequestParam("state") String state) {
+
+    	CurrentUserSessionStorage userSession=(CurrentUserSessionStorage)request.getSession().getAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY);
+    	boolean flag =AuthUtil.hasAuthByAuthData(userSession.getAuthList(), "QUERY_USERS_ALL");
+        if(flag){
+    	    return userService.getUsers(username, phone, roleid, ("所有".equals(state)?"":state));
+        }else {
+        	flag =AuthUtil.hasAuthByAuthData(userSession.getAuthList(), "QUERY_USERS_BY_OWNER");
+        	if(flag){
+        	   return userService.getUsersByOwner(username, phone, roleid, ("所有".equals(state)?"":state),userSession.getUserId().intValue());
+        	}
+        	   return  null;
+        }
+
+    }
 
     @PutMapping(value = "/user")
     public void updateUser(@RequestParam("userid") String userid,
@@ -151,32 +151,32 @@ public class UserController extends BaseController {
 //
 //    }
 
-    @PostMapping(value = "/users")
-    public DataTableResult<User> queryUserPage(User user, DateTableParameter dateTableParameter) {
-    	DataTableResult<User>  dataTableResult = new DataTableResult<User>();
-    	CurrentUserSessionStorage userSession=(CurrentUserSessionStorage)request.getSession().getAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY);
-    	Page<User> dbPageData  = null;
-    	boolean flag =AuthUtil.hasAuthByAuthData(userSession.getAuthList(), "QUERY_USERS_ALL");
-        if(flag){
-        	user.setState("所有".equals(user.getState())?"":user.getState());
-        	dbPageData = userService.queryUserPage(user,dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
-        	dataTableResult.setDraw(dateTableParameter.getDraw());
-        	dataTableResult.setData(dbPageData.getContent());
-        	dataTableResult.setRecordsFiltered(dbPageData.getTotalElements());
-        	dataTableResult.setRecordsTotal(dbPageData.getTotalElements());
-        }else{
-        	flag = AuthUtil.hasAuthByAuthData(userSession.getAuthList(), "QUERY_USERS_BY_OWNER");
-        	if(flag) {
-        		user.setState("所有".equals(user.getState())?"":user.getState());
-        		user.setUserid(userSession.getUserId().intValue());
-            	dbPageData = userService.queryUserPage(user,dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
-            	dataTableResult.setDraw(dateTableParameter.getDraw());
-            	dataTableResult.setData(dbPageData.getContent());
-            	dataTableResult.setRecordsFiltered(dbPageData.getTotalElements());
-            	dataTableResult.setRecordsTotal(dbPageData.getTotalElements());
-        	}
-        	return null;
-        }
-        return dataTableResult;
-    }
+//    @PostMapping(value = "/users")
+//    public DataTableResult<User> queryUserPage(User user, DateTableParameter dateTableParameter) {
+//    	DataTableResult<User>  dataTableResult = new DataTableResult<User>();
+//    	CurrentUserSessionStorage userSession=(CurrentUserSessionStorage)request.getSession().getAttribute(CurrentUserSessionStorage.CURRENT_USER_SESSION_STORE_KEY);
+//    	Page<User> dbPageData  = null;
+//    	boolean flag =AuthUtil.hasAuthByAuthData(userSession.getAuthList(), "QUERY_USERS_ALL");
+//        if(flag){
+//        	user.setState("所有".equals(user.getState())?"":user.getState());
+//        	dbPageData = userService.queryUserPage(user,dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
+//        	dataTableResult.setDraw(dateTableParameter.getDraw());
+//        	dataTableResult.setData(dbPageData.getContent());
+//        	dataTableResult.setRecordsFiltered(dbPageData.getTotalElements());
+//        	dataTableResult.setRecordsTotal(dbPageData.getTotalElements());
+//        }else{
+//        	flag = AuthUtil.hasAuthByAuthData(userSession.getAuthList(), "QUERY_USERS_BY_OWNER");
+//        	if(flag) {
+//        		user.setState("所有".equals(user.getState())?"":user.getState());
+//        		user.setUserid(userSession.getUserId().intValue());
+//            	dbPageData = userService.queryUserPage(user,dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
+//            	dataTableResult.setDraw(dateTableParameter.getDraw());
+//            	dataTableResult.setData(dbPageData.getContent());
+//            	dataTableResult.setRecordsFiltered(dbPageData.getTotalElements());
+//            	dataTableResult.setRecordsTotal(dbPageData.getTotalElements());
+//        	}
+//        	return null;
+//        }
+//        return dataTableResult;
+//    }
 }

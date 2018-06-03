@@ -58,7 +58,6 @@ public class CarController {
         JSONObject jasonV = JSONObject.fromObject(car);
         if (jasonV.get("createdate") == null) {
             jasonV.put("createdate", new Date().toString());
-            logger.info("hello");
         }
         logger.info(jasonV.get("createdate").toString());
         Car c = (Car) JSONObject.toBean(jasonV, Car.class);

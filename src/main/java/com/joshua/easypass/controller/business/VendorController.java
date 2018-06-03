@@ -88,14 +88,14 @@ public class VendorController {
     }
 
 
-    @PostMapping(value = "/vendorPage")
-    public DataTableResult<Vendor> queryAccessLogPage(DateTableParameter dateTableParameter) {
-        DataTableResult<Vendor> dataTableResult = new DataTableResult<Vendor>();
-        Page<Vendor> dbPageData = vdrService.queryVendorPage(null, dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
-        dataTableResult.setDraw(dateTableParameter.getDraw());
-        dataTableResult.setData(dbPageData.getContent());
-        dataTableResult.setRecordsFiltered(dbPageData.getTotalElements());
-        dataTableResult.setRecordsTotal(dbPageData.getTotalElements());
-        return dataTableResult;
-    }
+//    @PostMapping(value = "/vendorPage")
+//    public DataTableResult<Vendor> queryAccessLogPage(DateTableParameter dateTableParameter) {
+//        DataTableResult<Vendor> dataTableResult = new DataTableResult<Vendor>();
+//        Page<Vendor> dbPageData = vdrService.queryVendorPage(null, dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
+//        dataTableResult.setDraw(dateTableParameter.getDraw());
+//        dataTableResult.setData(dbPageData.getContent());
+//        dataTableResult.setRecordsFiltered(dbPageData.getTotalElements());
+//        dataTableResult.setRecordsTotal(dbPageData.getTotalElements());
+//        return dataTableResult;
+//    }
 }

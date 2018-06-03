@@ -31,12 +31,14 @@ public class VendorService {
 
     @Autowired
     private VendorRepository vdrRepo;
+
     @Transactional
-    public void smtVdr(Integer vdrid){
+    public void smtVdr(Integer vdrid) {
         vdrRepo.smtVdr(vdrid);
     }
+
     @Transactional
-    public void delVdr(Integer vdrid){
+    public void delVdr(Integer vdrid) {
         vdrRepo.delVdr(vdrid);
     }
 
@@ -74,12 +76,12 @@ public class VendorService {
                 if (StringUtils.isNotBlank(contactphone)) {
                     predicates.add(criteriaBuilder.like(root.get("vdrplate"), "%" + contactphone + "%"));
                 }
-                if (StringUtils.isNotBlank(firstdate)) {
-                    String[] dates = firstdate.split(" ");
+                if (StringUtils.isNotBlank(firstdate) && !"null".equals(firstdate)) {
+                    String[] dates = firstdate.split("~");
                     Date date1 = DateUtil.StrToDate(dates[0]);
                     Date date2 = DateUtil.StrToDate(dates[1]);
-                    predicates.add(criteriaBuilder.greaterThan(root.get("firstdate"), "%" + date1 + "%"));
-                    predicates.add(criteriaBuilder.lessThan(root.get("firstdate"), "%" + date2 + "%"));
+                    predicates.add(criteriaBuilder.greaterThan(root.get("commitdate"), date1));
+                    predicates.add(criteriaBuilder.lessThan(root.get("commitdate"), date2));
                 }
                 if (StringUtils.isNotBlank(state)) {
                     predicates.add(criteriaBuilder.like(root.get("state"), "%" + state + "%"));
@@ -88,34 +90,34 @@ public class VendorService {
                     predicates.add(criteriaBuilder.like(root.get("state"), "%" + state + "%"));
                 }
                 if (StringUtils.isNotBlank(a[0].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemTidang"), "%" + a[0] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemTidang"), a[0]));
                 }
                 if (StringUtils.isNotBlank(a[1].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemGuohu"), "%" + a[1] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemGuohu"), a[1]));
                 }
                 if (StringUtils.isNotBlank(a[2].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemShangpai"), "%" + a[2] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemShangpai"), a[2]));
                 }
                 if (StringUtils.isNotBlank(a[3].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemWeizhang"), "%" + a[3] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemWeizhang"), a[3]));
                 }
                 if (StringUtils.isNotBlank(a[4].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemDiya"), "%" + a[4] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemDiya"), a[4]));
                 }
                 if (StringUtils.isNotBlank(a[5].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemJiechudiya"), "%" + a[5] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemJiechudiya"), a[5]));
                 }
                 if (StringUtils.isNotBlank(a[6].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemWeituo"), "%" + a[6] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemWeituo"), a[6]));
                 }
                 if (StringUtils.isNotBlank(a[7].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemNianjian"), "%" + a[7] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemNianjian"), a[7]));
                 }
                 if (StringUtils.isNotBlank(a[8].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemBuhuan"), "%" + a[8] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemBuhuan"), a[8]));
                 }
                 if (StringUtils.isNotBlank(a[9].trim())) {
-                    predicates.add(criteriaBuilder.equal(root.get("itemQita"), "%" + a[9] + "%"));
+                    predicates.add(criteriaBuilder.equal(root.get("itemQita"), a[9]));
                 }
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }
@@ -145,10 +147,10 @@ public class VendorService {
     }
 
 
-    public Page<Vendor> queryVendorPage(Vendor vendor, int currentPageIndex, int pageSize) {
-        Sort sort = new Sort(Sort.Direction.DESC, "vdrid");
-        Pageable pageable = PageRequest.of(currentPageIndex, pageSize, sort);
-        return vdrRepo.findAll(pageable);
-    }
+//    public Page<Vendor> queryVendorPage(Vendor vendor, int currentPageIndex, int pageSize) {
+//        Sort sort = new Sort(Sort.Direction.DESC, "vdrid");
+//        Pageable pageable = PageRequest.of(currentPageIndex, pageSize, sort);
+//        return vdrRepo.findAll(pageable);
+//    }
 
 }
