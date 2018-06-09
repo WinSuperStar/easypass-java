@@ -12,11 +12,11 @@ public interface PresaleRepository extends JpaRepository<Presale, Integer>, JpaS
     public Presale getPresale(@Param("saleid") Integer saleid);
 
     @Modifying
-    @Query(value="DELETE FROM Presale p WHERE p.saleid = :saleid", nativeQuery = true)
+    @Query(value="DELETE FROM Presale WHERE saleid = :saleid", nativeQuery = true)
     public void delPresale(@Param("saleid") Integer saleid);
 
     @Modifying
-    @Query(value="UPDATE Presale p SET p.state = :state WHERE p.saleid = :saleid", nativeQuery = true)
+    @Query(value="UPDATE Presale SET state = :state WHERE saleid = :saleid", nativeQuery = true)
     public void updatePresaleState(@Param("state") String state, @Param("saleid") Integer saleid);
 
 

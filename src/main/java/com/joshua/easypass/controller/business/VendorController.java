@@ -83,6 +83,9 @@ public class VendorController {
         v.setItemNianjianCompletedate("".equals(jasonV.get("itemNianjianCompletedate")) ? DateUtil.autoComDate() : DateUtil.StrToDate(jasonV.get("itemNianjianCompletedate") + ""));
         v.setItemBuhuanCompletedate("".equals(jasonV.get("itemBuhuanCompletedate")) ? DateUtil.autoComDate() : DateUtil.StrToDate(jasonV.get("itemBuhuanCompletedate") + ""));
         v.setItemQitaCompletedate("".equals(jasonV.get("itemQitaCompletedate")) ? DateUtil.autoComDate() : DateUtil.StrToDate(jasonV.get("itemQitaCompletedate") + ""));
+        if(!"已提交".equals(v.getState())){
+            v.setState("未提交");
+        }
         logger.info(v.toString());
         vdrService.saveVdr(v);
     }

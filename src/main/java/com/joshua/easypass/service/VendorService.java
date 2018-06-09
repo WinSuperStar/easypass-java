@@ -132,7 +132,7 @@ public class VendorService {
         Vendor v = new Vendor();
         v.setCreatedate(new Date());
         v.setCreator(creator);
-        v.setState("未提交");
+        v.setState("新创建");
         v = vdrRepo.saveAndFlush(v);
         return v.getVdrid();
     }

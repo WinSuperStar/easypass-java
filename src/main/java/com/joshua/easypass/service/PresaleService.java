@@ -114,7 +114,7 @@ public class PresaleService {
         Presale p = new Presale();
         p.setCreatedate(new Date());
         p.setCreator(creator);
-        p.setState("未录入");
+        p.setState("新创建");
         p = pRepo.saveAndFlush(p);
         return p.getSaleid();
     }

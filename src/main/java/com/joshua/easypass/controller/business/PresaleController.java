@@ -55,6 +55,9 @@ public class PresaleController {
         logger.info("转成的jason对象为：" + jasonV);
 
         Presale v = (Presale) JSONObject.toBean(jasonV, Presale.class);
+        if(!"已录入".equals(v.getState())){
+            v.setState("未录入");
+        }
         pService.savePresale(v);
     }
 

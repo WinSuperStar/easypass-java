@@ -11,12 +11,12 @@ import java.util.Date;
 
 public interface VendorRepository extends JpaRepository<Vendor, Integer>, JpaSpecificationExecutor<Vendor> {
     @Modifying
-    @Query(value="UPDATE Vendor v SET v.state = '已提交' WHERE v.vdrid = :vdrid", nativeQuery = true)
-    public Vendor smtVdr(@Param("vdrid") Integer vdrid);
+    @Query(value="UPDATE Vendor SET state = '已提交' WHERE vdrid = :vdrid", nativeQuery = true)
+    public void smtVdr(@Param("vdrid") Integer vdrid);
 
     @Modifying
-    @Query(value="DELETE FROM Vendor v WHERE v.vdrid = :vdrid", nativeQuery = true)
-    public Vendor delVdr(@Param("vdrid") Integer vdrid);
+    @Query(value="DELETE FROM Vendor WHERE vdrid = :vdrid", nativeQuery = true)
+    public void delVdr(@Param("vdrid") Integer vdrid);
 
 
     @Query("SELECT v FROM Vendor v WHERE v.vdrid = :vdrid")
