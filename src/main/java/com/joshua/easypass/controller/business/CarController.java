@@ -2,6 +2,7 @@ package com.joshua.easypass.controller.business;
 
 import com.joshua.easypass.entity.Car;
 import com.joshua.easypass.service.CarService;
+import com.joshua.easypass.util.DateUtil;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,10 +58,14 @@ public class CarController {
         logger.info(car);
         JSONObject jasonV = JSONObject.fromObject(car);
         if (jasonV.get("createdate") == null) {
-            jasonV.put("createdate", new Date().toString());
+            jasonV.put("createdate", new Date());
         }
-        logger.info(jasonV.get("createdate").toString());
+        if( jasonV.get("firstdate") != null) {
+            jasonV.put("firstdate", DateUtil.StrToDate(jasonV.get("firstdate").toString()));
+        }
+        logger.info("JSON转对象前的创建日期为"+jasonV.get("createdate").toString());
         Car c = (Car) JSONObject.toBean(jasonV, Car.class);
+        logger.info("JSON转对象后的创建日期为"+c.getCreatedate().toString());
         carService.saveCar(c);
     }
 

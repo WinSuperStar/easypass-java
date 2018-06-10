@@ -37,6 +37,9 @@ public class OrderController {
             @RequestParam("order") String order
     ) {
         JSONObject jasonV = JSONObject.fromObject(order);
+        if( jasonV.get("carRegDate") != null) {
+            jasonV.put("carRegDate", DateUtil.StrToDate(jasonV.get("carRegDate").toString()));
+        }
         logger.info("转成的jason对象为：" + jasonV);
         Order v = (Order) JSONObject.toBean(jasonV, Order.class);
         v.setItemTidangCompletedate("".equals(jasonV.get("itemTidangCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemTidangCompletedate")+""));

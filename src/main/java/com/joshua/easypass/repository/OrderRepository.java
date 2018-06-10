@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface OrderRepository extends JpaRepository<Order, Integer>, JpaSpecificationExecutor<Order> {
     @Modifying
-    @Query(value="UPDATE Order o SET o.state = :state WHERE o.orderid = :orderid", nativeQuery = true)
+    @Query(value="UPDATE order_ o SET state = :state WHERE orderid = :orderid", nativeQuery = true)
     public Order updateOdr(@Param("orderid") Integer orderid, @Param("state") String state);
 
     @Query("SELECT v FROM Order v WHERE v.orderid = :orderid")
