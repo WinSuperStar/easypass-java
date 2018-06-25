@@ -1,6 +1,9 @@
 package com.joshua.easypass.util;
 
+import java.text.Collator;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class DataUtil {
@@ -27,5 +30,16 @@ public class DataUtil {
         } else {
             return null;
         }
+    }
+
+    public static List<String> listSort(List<String> list) {
+        Collections.sort(list, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                Comparator<Object> com = Collator.getInstance(java.util.Locale.CHINA);
+                return com.compare(o1, o2);
+            }
+        });
+        return list;
     }
 }

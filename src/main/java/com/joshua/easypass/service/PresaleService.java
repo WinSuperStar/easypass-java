@@ -53,10 +53,10 @@ public class PresaleService {
 
                 List<Predicate> predicates = new ArrayList<>();
                 if (StringUtils.isNotBlank(addr)) {
-                    predicates.add(criteriaBuilder.like(root.get("vdraddr"), "%" + addr + "%"));
+                    predicates.add(criteriaBuilder.like(root.get("caraddr"), "%" + addr + "%"));
                 }
                 if (StringUtils.isNotBlank(vdrplate)) {
-                    predicates.add(criteriaBuilder.like(root.get("vdrplate"), "%" + vdrplate + "%"));
+                    predicates.add(criteriaBuilder.like(root.get("carplate"), "%" + vdrplate + "%"));
                 }
                 if (StringUtils.isNotBlank(cusmode)) {
                     predicates.add(criteriaBuilder.like(root.get("cusmode"), "%" + cusmode + "%"));
@@ -65,9 +65,6 @@ public class PresaleService {
                     predicates.add(criteriaBuilder.like(root.get("cusname"), "%" + cusname + "%"));
                 }
                 if (StringUtils.isNotBlank(state)) {
-                    predicates.add(criteriaBuilder.like(root.get("state"), "%" + state + "%"));
-                }
-                if (StringUtils.isNotBlank(itemlist)) {
                     predicates.add(criteriaBuilder.like(root.get("state"), "%" + state + "%"));
                 }
                 if (StringUtils.isNotBlank(a[0].trim())) {

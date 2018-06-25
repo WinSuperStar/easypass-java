@@ -33,7 +33,7 @@ public class PresaleController {
     }
 
     @PostMapping(value = "/getPresales")
-    public Presale[] getVdrs(@RequestParam("caraddr1") String caraddr1,
+    public Presale[] getPresales(@RequestParam("caraddr1") String caraddr1,
                              @RequestParam("caraddr2") String caraddr2,
                              @RequestParam("caraddr3") String caraddr3,
                              @RequestParam("carplate1") String carplate1,

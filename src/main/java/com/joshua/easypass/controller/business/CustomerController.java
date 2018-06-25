@@ -52,7 +52,7 @@ public class CustomerController {
                           @RequestParam("createdate") String createdate,
                           @RequestParam("creator") String creator,
                           @RequestParam("add1") String add1) {
-        Date currentTime = new Date();
+//        Date currentTime = new Date();
         Customer cus = new Customer();
         cus.setCusid(cusid);
         cus.setCusname(cusname);
@@ -61,11 +61,11 @@ public class CustomerController {
         cus.setCusmode(cusmode);
         cus.setAddress(address);
         cus.setState(state);
-        cus.setCreatedate(currentTime);
-        cus.setCreator(creator);
+//        cus.setCreatedate(currentTime);
+//        cus.setCreator(creator);
         cus.setAdd1(add1);
         logger.info("更新客户：" + cus.toString());
-        cusService.addCus(cus);
+        cusService.updateCus(cus);
     }
 
     @PostMapping(value = "/customers")
@@ -77,31 +77,6 @@ public class CustomerController {
     ) {
         return cusService.getCustomers(cusname, cusmode, contact, contactPhone, state);
     }
-
-//    @PostMapping(value = "/customers")
-//    public DataTableResult<Customer> getCus(@RequestParam("cusname") String cusname,
-//                                            @RequestParam("cusmode") String cusmode,
-//                                            @RequestParam("contact") String contact,
-//                                            @RequestParam("contactPhone") String contactPhone,
-//                                            @RequestParam("state") String state,
-//                                            DateTableParameter dateTableParameter
-//    ) {
-//        DataTableResult<Customer> dataTableResult = new DataTableResult<Customer>();
-//        Page<Customer> dbPageData = null;
-//        Customer cus = new Customer();
-//        cus.setCusname(cusname);
-//        cus.setCusmode(cusmode);
-//        cus.setContact(contact);
-//        cus.setContactPhone(contactPhone);
-//        cus.setState(state);
-//        dbPageData = cusService.queryCusPage(cus, dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
-//        dataTableResult.setDraw(dateTableParameter.getDraw());
-//        dataTableResult.setData(dbPageData.getContent());
-//        dataTableResult.setRecordsFiltered(dbPageData.getTotalElements());
-//        dataTableResult.setRecordsTotal(dbPageData.getTotalElements());
-//        //return cusService.getCustomers(cusname, ("全部".equals(cusmode) ? "" : cusmode), contact, contactPhone, state);
-//        return dataTableResult;
-//    }
 
     @PostMapping(value = "/addCus")
     public void addCus(@RequestParam("cusname") String cusname,
@@ -126,16 +101,4 @@ public class CustomerController {
         logger.info("新建客户：" + cus.toString());
         cusService.addCus(cus);
     }
-    
-    
-   /* @PostMapping(value = "/cusPage")
-    public DataTableResult<Customer> queryAccessLogPage(DateTableParameter dateTableParameter) {
-    	DataTableResult<Customer>  dataTableResult = new DataTableResult<Customer>();
-    	Page<Customer> dbPageData = cusService.queryCustomerPage(null,dateTableParameter.currentPageIndex(), dateTableParameter.getLength());
-    	dataTableResult.setDraw(dateTableParameter.getDraw());
-    	dataTableResult.setData(dbPageData.getContent());
-    	dataTableResult.setRecordsFiltered(dbPageData.getTotalElements());
-    	dataTableResult.setRecordsTotal(dbPageData.getTotalElements());
-        return dataTableResult;
-    }*/
 }

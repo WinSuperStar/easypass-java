@@ -27,9 +27,68 @@ public class OrderController {
         return orderService.createOdr(creator);
     }
 
+    @PostMapping(value = "/getOdrs")
+    public Order[] getOdrs(@RequestParam("orderid") String orderid,
+                           @RequestParam("carplate1") String carplate1,
+                           @RequestParam("carplate2") String carplate2,
+                           @RequestParam("carplatenum") String carplatenum,
+                           @RequestParam("oriownername") String oriownername,
+                           @RequestParam("carbrand") String carbrand,
+                           @RequestParam("carset") String carset,
+                           @RequestParam("carnum") String carnum,
+                           @RequestParam("cusname") String cusname,
+                           @RequestParam("kuaidinum") String kuaidinum,
+                           @RequestParam("creator") String creator,
+                           @RequestParam("itemlist") String itemlist
+    ) {
+        return orderService.getOdrs(orderid, carplate1, carplate2, carplatenum, oriownername, carbrand, carset, carnum, cusname, kuaidinum, creator, itemlist);
+    }
+
+    @PostMapping(value = "/delOdr")
+    public void delVdr(@RequestParam("odrid") Integer odrid) {
+        orderService.delOdr(odrid);
+    }
+
+    @PostMapping(value = "/autoDelOdr")
+    public void autoDelVdr(@RequestParam("odrid") Integer odrid) {
+        orderService.delOdr(odrid);
+    }
+
+    @PostMapping(value = "/autoGetOdr")
+    public Order autoGetOdr(@RequestParam("orderid") Integer orderid) {
+        return orderService.getOdr(orderid);
+    }
+
     @PostMapping(value = "/getOdr")
     public Order getOdr(@RequestParam("orderid") Integer orderid) {
         return orderService.getOdr(orderid);
+    }
+
+    @PostMapping(value = "/updateOdrPreSubmit")
+    public void updateOdrPreSubmit(@RequestParam("orderid") Integer orderid) {
+        this.orderService.updateOdr(orderid, "待提交", "已寄出");
+    }
+
+    @PostMapping(value = "/updateOdrPreBuz")
+    public void updateOdrPreBuz(@RequestParam("orderid") Integer orderid) {
+        this.orderService.updateOdr(orderid, "待办证", "已签收");
+    }
+
+    @PostMapping(value = "/orderAssign")
+    public void orderAssign(@RequestParam("orderid") Integer orderid,
+                            @RequestParam("userid") Integer userid,
+                            @RequestParam("username") String username) {
+        this.orderService.orderAssign(orderid, userid, username);
+    }
+
+    @PostMapping(value = "/updateOdrIng")
+    public void updateOdrIng(@RequestParam("orderid") Integer orderid) {
+        this.orderService.updateOdr(orderid, "办证中", "已签收");
+    }
+
+    @PostMapping(value = "/updateOdrDoneBuz")
+    public void updateOdrDoneBuz(@RequestParam("orderid") Integer orderid) {
+        this.orderService.updateOdr(orderid, "办证完成", "已签收");
     }
 
     @PostMapping(value = "/saveOdr")
@@ -37,21 +96,21 @@ public class OrderController {
             @RequestParam("order") String order
     ) {
         JSONObject jasonV = JSONObject.fromObject(order);
-        if( jasonV.get("carRegDate") != null) {
+        if (jasonV.get("carRegDate") != null) {
             jasonV.put("carRegDate", DateUtil.StrToDate(jasonV.get("carRegDate").toString()));
         }
         logger.info("转成的jason对象为：" + jasonV);
         Order v = (Order) JSONObject.toBean(jasonV, Order.class);
-        v.setItemTidangCompletedate("".equals(jasonV.get("itemTidangCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemTidangCompletedate")+""));
-        v.setItemGuohuCompletedate("".equals(jasonV.get("itemGuohuCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemGuohuCompletedate")+""));
-        v.setItemShangpaiCompletedate("".equals(jasonV.get("itemShangpaiCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemShangpaiCompletedate")+""));
-        v.setItemWeizhangCompletedate("".equals(jasonV.get("itemWeizhangCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemWeizhangCompletedate")+""));
-        v.setItemDiyaCompletedate("".equals(jasonV.get("itemDiyaCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemDiyaCompletedate")+""));
-        v.setItemJiechudiyaCompletedate("".equals(jasonV.get("itemJiechudiyaCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemJiechudiyaCompletedate")+""));
-        v.setItemWeituoCompletedate("".equals(jasonV.get("itemWeituoCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemWeituoCompletedate")+""));
-        v.setItemNianjianCompletedate("".equals(jasonV.get("itemNianjianCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemNianjianCompletedate")+""));
-        v.setItemBuhuanCompletedate("".equals(jasonV.get("itemBuhuanCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemBuhuanCompletedate")+""));
-        v.setItemQitaCompletedate("".equals(jasonV.get("itemQitaCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemQitaCompletedate")+""));
+//        v.setItemTidangCompletedate("".equals(jasonV.get("itemTidangCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemTidangCompletedate")+""));
+//        v.setItemGuohuCompletedate("".equals(jasonV.get("itemGuohuCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemGuohuCompletedate")+""));
+//        v.setItemShangpaiCompletedate("".equals(jasonV.get("itemShangpaiCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemShangpaiCompletedate")+""));
+//        v.setItemWeizhangCompletedate("".equals(jasonV.get("itemWeizhangCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemWeizhangCompletedate")+""));
+//        v.setItemDiyaCompletedate("".equals(jasonV.get("itemDiyaCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemDiyaCompletedate")+""));
+//        v.setItemJiechudiyaCompletedate("".equals(jasonV.get("itemJiechudiyaCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemJiechudiyaCompletedate")+""));
+//        v.setItemWeituoCompletedate("".equals(jasonV.get("itemWeituoCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemWeituoCompletedate")+""));
+//        v.setItemNianjianCompletedate("".equals(jasonV.get("itemNianjianCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemNianjianCompletedate")+""));
+//        v.setItemBuhuanCompletedate("".equals(jasonV.get("itemBuhuanCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemBuhuanCompletedate")+""));
+//        v.setItemQitaCompletedate("".equals(jasonV.get("itemQitaCompletedate"))?DateUtil.autoComDate():DateUtil.StrToDate(jasonV.get("itemQitaCompletedate")+""));
         logger.info(v.toString());
         orderService.saveOdr(v);
     }

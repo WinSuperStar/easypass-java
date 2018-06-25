@@ -27,21 +27,21 @@ public class Presale {
     private String itemTidang;
     private float itemTidangTax;
     private float itemTidangCost;
-    private Date itemTidangCompletedate;
+    private String itemTidangCompletedate;
     private String itemTidangDesc;
     private Integer itemTidangReqId;
     // guohu
     private String itemGuohu;
     private float itemGuohuTax;
     private float itemGuohuCost;
-    private Date itemGuohuCompletedate;
+    private String itemGuohuCompletedate;
     private String itemGuohuDesc;
     private Integer itemGuohuReqId;
     //shangpai
     private String itemShangpai;
     private float itemShangpaiTax;
     private float itemShangpaiCost;
-    private Date itemShangpaiCompletedate;
+    private String itemShangpaiCompletedate;
     private String itemShangpaiDesc;
     private Integer itemShangpaiReqId;
     //weizhang
@@ -49,46 +49,46 @@ public class Presale {
     private float itemWeizhangTax;
     private float itemWeizhangCost;
     private float itemWeizhangCost2;
-    private Date itemWeizhangCompletedate;
+    private String itemWeizhangCompletedate;
     private String itemWeizhangDesc;
     private Integer itemWeizhangReqId;
     //diya
     private String itemDiya;
     private float itemDiyaCost;
-    private Date itemDiyaCompletedate;
+    private String itemDiyaCompletedate;
     private String itemDiyaDesc;
     private Integer itemDiyaReqId;
     //jiechudiya
     private String itemJiechudiya;
     private float itemJiechudiyaCost;
-    private Date itemJiechudiyaCompletedate;
+    private String itemJiechudiyaCompletedate;
     private String itemJiechudiyaDesc;
     private Integer itemJiechudiyaReqId;
     //weituo
     private String itemWeituo;
     private float itemWeituoTax;
     private float itemWeituoCost;
-    private Date itemWeituoCompletedate;
+    private String itemWeituoCompletedate;
     private String itemWeituoDesc;
     private Integer itemWeituoReqId;
     //nianjian
     private String itemNianjian;
     private float itemNianjianTax;
     private float itemNianjianCost;
-    private Date itemNianjianCompletedate;
+    private String itemNianjianCompletedate;
     private String itemNianjianDesc;
     private Integer itemNianjianReqId;
     //buhuan
     private String itemBuhuan;
     private float itemBuhuanTax;
     private float itemBuhuanCost;
-    private Date itemBuhuanCompletedate;
+    private String itemBuhuanCompletedate;
     private String itemBuhuanDesc;
     private Integer itemBuhuanReqId;
     //qita
     private String itemQita;
     private float itemQitaCost;
-    private Date itemQitaCompletedate;
+    private String itemQitaCompletedate;
     private String itemQitaDesc;
     private Integer itemQitaReqId;
     private float salesum;
@@ -99,30 +99,6 @@ public class Presale {
     private String add1;
     private String add2;
     private String add3;
-
-    public float getSalesum() {
-        return salesum;
-    }
-
-    public void setSalesum(float salesum) {
-        this.salesum = salesum;
-    }
-
-    public Integer getVdrid() {
-        return vdrid;
-    }
-
-    public void setVdrid(Integer vdrid) {
-        this.vdrid = vdrid;
-    }
-
-    public float getItemWeizhangCost2() {
-        return itemWeizhangCost2;
-    }
-
-    public void setItemWeizhangCost2(float itemWeizhangCost2) {
-        this.itemWeizhangCost2 = itemWeizhangCost2;
-    }
 
     public Integer getSaleid() {
         return saleid;
@@ -162,6 +138,14 @@ public class Presale {
 
     public void setCusmode(String cusmode) {
         this.cusmode = cusmode;
+    }
+
+    public Integer getVdrid() {
+        return vdrid;
+    }
+
+    public void setVdrid(Integer vdrid) {
+        this.vdrid = vdrid;
     }
 
     public String getVdrname() {
@@ -244,11 +228,11 @@ public class Presale {
         this.itemTidangCost = itemTidangCost;
     }
 
-    public Date getItemTidangCompletedate() {
+    public String getItemTidangCompletedate() {
         return itemTidangCompletedate;
     }
 
-    public void setItemTidangCompletedate(Date itemTidangCompletedate) {
+    public void setItemTidangCompletedate(String itemTidangCompletedate) {
         this.itemTidangCompletedate = itemTidangCompletedate;
     }
 
@@ -292,11 +276,11 @@ public class Presale {
         this.itemGuohuCost = itemGuohuCost;
     }
 
-    public Date getItemGuohuCompletedate() {
+    public String getItemGuohuCompletedate() {
         return itemGuohuCompletedate;
     }
 
-    public void setItemGuohuCompletedate(Date itemGuohuCompletedate) {
+    public void setItemGuohuCompletedate(String itemGuohuCompletedate) {
         this.itemGuohuCompletedate = itemGuohuCompletedate;
     }
 
@@ -340,11 +324,11 @@ public class Presale {
         this.itemShangpaiCost = itemShangpaiCost;
     }
 
-    public Date getItemShangpaiCompletedate() {
+    public String getItemShangpaiCompletedate() {
         return itemShangpaiCompletedate;
     }
 
-    public void setItemShangpaiCompletedate(Date itemShangpaiCompletedate) {
+    public void setItemShangpaiCompletedate(String itemShangpaiCompletedate) {
         this.itemShangpaiCompletedate = itemShangpaiCompletedate;
     }
 
@@ -388,11 +372,19 @@ public class Presale {
         this.itemWeizhangCost = itemWeizhangCost;
     }
 
-    public Date getItemWeizhangCompletedate() {
+    public float getItemWeizhangCost2() {
+        return itemWeizhangCost2;
+    }
+
+    public void setItemWeizhangCost2(float itemWeizhangCost2) {
+        this.itemWeizhangCost2 = itemWeizhangCost2;
+    }
+
+    public String getItemWeizhangCompletedate() {
         return itemWeizhangCompletedate;
     }
 
-    public void setItemWeizhangCompletedate(Date itemWeizhangCompletedate) {
+    public void setItemWeizhangCompletedate(String itemWeizhangCompletedate) {
         this.itemWeizhangCompletedate = itemWeizhangCompletedate;
     }
 
@@ -428,11 +420,11 @@ public class Presale {
         this.itemDiyaCost = itemDiyaCost;
     }
 
-    public Date getItemDiyaCompletedate() {
+    public String getItemDiyaCompletedate() {
         return itemDiyaCompletedate;
     }
 
-    public void setItemDiyaCompletedate(Date itemDiyaCompletedate) {
+    public void setItemDiyaCompletedate(String itemDiyaCompletedate) {
         this.itemDiyaCompletedate = itemDiyaCompletedate;
     }
 
@@ -468,11 +460,11 @@ public class Presale {
         this.itemJiechudiyaCost = itemJiechudiyaCost;
     }
 
-    public Date getItemJiechudiyaCompletedate() {
+    public String getItemJiechudiyaCompletedate() {
         return itemJiechudiyaCompletedate;
     }
 
-    public void setItemJiechudiyaCompletedate(Date itemJiechudiyaCompletedate) {
+    public void setItemJiechudiyaCompletedate(String itemJiechudiyaCompletedate) {
         this.itemJiechudiyaCompletedate = itemJiechudiyaCompletedate;
     }
 
@@ -516,11 +508,11 @@ public class Presale {
         this.itemWeituoCost = itemWeituoCost;
     }
 
-    public Date getItemWeituoCompletedate() {
+    public String getItemWeituoCompletedate() {
         return itemWeituoCompletedate;
     }
 
-    public void setItemWeituoCompletedate(Date itemWeituoCompletedate) {
+    public void setItemWeituoCompletedate(String itemWeituoCompletedate) {
         this.itemWeituoCompletedate = itemWeituoCompletedate;
     }
 
@@ -564,11 +556,11 @@ public class Presale {
         this.itemNianjianCost = itemNianjianCost;
     }
 
-    public Date getItemNianjianCompletedate() {
+    public String getItemNianjianCompletedate() {
         return itemNianjianCompletedate;
     }
 
-    public void setItemNianjianCompletedate(Date itemNianjianCompletedate) {
+    public void setItemNianjianCompletedate(String itemNianjianCompletedate) {
         this.itemNianjianCompletedate = itemNianjianCompletedate;
     }
 
@@ -612,11 +604,11 @@ public class Presale {
         this.itemBuhuanCost = itemBuhuanCost;
     }
 
-    public Date getItemBuhuanCompletedate() {
+    public String getItemBuhuanCompletedate() {
         return itemBuhuanCompletedate;
     }
 
-    public void setItemBuhuanCompletedate(Date itemBuhuanCompletedate) {
+    public void setItemBuhuanCompletedate(String itemBuhuanCompletedate) {
         this.itemBuhuanCompletedate = itemBuhuanCompletedate;
     }
 
@@ -652,11 +644,11 @@ public class Presale {
         this.itemQitaCost = itemQitaCost;
     }
 
-    public Date getItemQitaCompletedate() {
+    public String getItemQitaCompletedate() {
         return itemQitaCompletedate;
     }
 
-    public void setItemQitaCompletedate(Date itemQitaCompletedate) {
+    public void setItemQitaCompletedate(String itemQitaCompletedate) {
         this.itemQitaCompletedate = itemQitaCompletedate;
     }
 
@@ -674,6 +666,14 @@ public class Presale {
 
     public void setItemQitaReqId(Integer itemQitaReqId) {
         this.itemQitaReqId = itemQitaReqId;
+    }
+
+    public float getSalesum() {
+        return salesum;
+    }
+
+    public void setSalesum(float salesum) {
+        this.salesum = salesum;
     }
 
     public String getState() {
@@ -730,5 +730,90 @@ public class Presale {
 
     public void setAdd3(String add3) {
         this.add3 = add3;
+    }
+
+    @Override
+    public String toString() {
+        return "Presale{" +
+                "saleid=" + saleid +
+                ", caraddr='" + caraddr + '\'' +
+                ", carplate='" + carplate + '\'' +
+                ", cusname='" + cusname + '\'' +
+                ", cusmode='" + cusmode + '\'' +
+                ", vdrid=" + vdrid +
+                ", vdrname='" + vdrname + '\'' +
+                ", vdraddr='" + vdraddr + '\'' +
+                ", vdraddrdetail='" + vdraddrdetail + '\'' +
+                ", vdrplate='" + vdrplate + '\'' +
+                ", contact='" + contact + '\'' +
+                ", contactphone='" + contactphone + '\'' +
+                ", contacts='" + contacts + '\'' +
+                ", itemTidang='" + itemTidang + '\'' +
+                ", itemTidangTax=" + itemTidangTax +
+                ", itemTidangCost=" + itemTidangCost +
+                ", itemTidangCompletedate='" + itemTidangCompletedate + '\'' +
+                ", itemTidangDesc='" + itemTidangDesc + '\'' +
+                ", itemTidangReqId=" + itemTidangReqId +
+                ", itemGuohu='" + itemGuohu + '\'' +
+                ", itemGuohuTax=" + itemGuohuTax +
+                ", itemGuohuCost=" + itemGuohuCost +
+                ", itemGuohuCompletedate='" + itemGuohuCompletedate + '\'' +
+                ", itemGuohuDesc='" + itemGuohuDesc + '\'' +
+                ", itemGuohuReqId=" + itemGuohuReqId +
+                ", itemShangpai='" + itemShangpai + '\'' +
+                ", itemShangpaiTax=" + itemShangpaiTax +
+                ", itemShangpaiCost=" + itemShangpaiCost +
+                ", itemShangpaiCompletedate='" + itemShangpaiCompletedate + '\'' +
+                ", itemShangpaiDesc='" + itemShangpaiDesc + '\'' +
+                ", itemShangpaiReqId=" + itemShangpaiReqId +
+                ", itemWeizhang='" + itemWeizhang + '\'' +
+                ", itemWeizhangTax=" + itemWeizhangTax +
+                ", itemWeizhangCost=" + itemWeizhangCost +
+                ", itemWeizhangCost2=" + itemWeizhangCost2 +
+                ", itemWeizhangCompletedate='" + itemWeizhangCompletedate + '\'' +
+                ", itemWeizhangDesc='" + itemWeizhangDesc + '\'' +
+                ", itemWeizhangReqId=" + itemWeizhangReqId +
+                ", itemDiya='" + itemDiya + '\'' +
+                ", itemDiyaCost=" + itemDiyaCost +
+                ", itemDiyaCompletedate='" + itemDiyaCompletedate + '\'' +
+                ", itemDiyaDesc='" + itemDiyaDesc + '\'' +
+                ", itemDiyaReqId=" + itemDiyaReqId +
+                ", itemJiechudiya='" + itemJiechudiya + '\'' +
+                ", itemJiechudiyaCost=" + itemJiechudiyaCost +
+                ", itemJiechudiyaCompletedate='" + itemJiechudiyaCompletedate + '\'' +
+                ", itemJiechudiyaDesc='" + itemJiechudiyaDesc + '\'' +
+                ", itemJiechudiyaReqId=" + itemJiechudiyaReqId +
+                ", itemWeituo='" + itemWeituo + '\'' +
+                ", itemWeituoTax=" + itemWeituoTax +
+                ", itemWeituoCost=" + itemWeituoCost +
+                ", itemWeituoCompletedate='" + itemWeituoCompletedate + '\'' +
+                ", itemWeituoDesc='" + itemWeituoDesc + '\'' +
+                ", itemWeituoReqId=" + itemWeituoReqId +
+                ", itemNianjian='" + itemNianjian + '\'' +
+                ", itemNianjianTax=" + itemNianjianTax +
+                ", itemNianjianCost=" + itemNianjianCost +
+                ", itemNianjianCompletedate='" + itemNianjianCompletedate + '\'' +
+                ", itemNianjianDesc='" + itemNianjianDesc + '\'' +
+                ", itemNianjianReqId=" + itemNianjianReqId +
+                ", itemBuhuan='" + itemBuhuan + '\'' +
+                ", itemBuhuanTax=" + itemBuhuanTax +
+                ", itemBuhuanCost=" + itemBuhuanCost +
+                ", itemBuhuanCompletedate='" + itemBuhuanCompletedate + '\'' +
+                ", itemBuhuanDesc='" + itemBuhuanDesc + '\'' +
+                ", itemBuhuanReqId=" + itemBuhuanReqId +
+                ", itemQita='" + itemQita + '\'' +
+                ", itemQitaCost=" + itemQitaCost +
+                ", itemQitaCompletedate='" + itemQitaCompletedate + '\'' +
+                ", itemQitaDesc='" + itemQitaDesc + '\'' +
+                ", itemQitaReqId=" + itemQitaReqId +
+                ", salesum=" + salesum +
+                ", state='" + state + '\'' +
+                ", commitdate=" + commitdate +
+                ", createdate=" + createdate +
+                ", creator='" + creator + '\'' +
+                ", add1='" + add1 + '\'' +
+                ", add2='" + add2 + '\'' +
+                ", add3='" + add3 + '\'' +
+                '}';
     }
 }

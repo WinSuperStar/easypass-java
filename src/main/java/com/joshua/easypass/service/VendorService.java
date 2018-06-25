@@ -57,7 +57,7 @@ public class VendorService {
             private static final long serialVersionUID = 1L;
             String addr = vdraddr1 + ("".equals(vdraddr2) ? "" : (" " + vdraddr2)) + ("".equals(vdraddr3) ? "" : (" " + vdraddr3));
             String vdrplate = vdrplate1 + ("".equals(vdrplate2) ? "" : (" " + vdrplate2));
-            String[] a = DataUtil.VdrSearchTrim(itemlist.split(","));
+            String[] a = StringUtils.isNotBlank(itemlist) ? DataUtil.VdrSearchTrim(itemlist.split(",")):new String[]{"","","","","","","","","",""};
 
             @Override
             public Predicate toPredicate(Root<Vendor> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
@@ -70,10 +70,10 @@ public class VendorService {
                     predicates.add(criteriaBuilder.like(root.get("vdrplate"), "%" + vdrplate + "%"));
                 }
                 if (StringUtils.isNotBlank(contact)) {
-                    predicates.add(criteriaBuilder.like(root.get("vdrplate"), "%" + contact + "%"));
+                    predicates.add(criteriaBuilder.like(root.get("contact"), "%" + contact + "%"));
                 }
                 if (StringUtils.isNotBlank(contactphone)) {
-                    predicates.add(criteriaBuilder.like(root.get("vdrplate"), "%" + contactphone + "%"));
+                    predicates.add(criteriaBuilder.like(root.get("contactphone"), "%" + contactphone + "%"));
                 }
                 if (StringUtils.isNotBlank(firstdate) && !"null".equals(firstdate)) {
                     String[] dates = firstdate.split("~");

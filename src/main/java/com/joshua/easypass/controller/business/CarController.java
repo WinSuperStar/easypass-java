@@ -1,6 +1,7 @@
 package com.joshua.easypass.controller.business;
 
 import com.joshua.easypass.entity.Car;
+import com.joshua.easypass.entity.Carinfo;
 import com.joshua.easypass.service.CarService;
 import com.joshua.easypass.util.DateUtil;
 import net.sf.json.JSONObject;
@@ -60,12 +61,12 @@ public class CarController {
         if (jasonV.get("createdate") == null) {
             jasonV.put("createdate", new Date());
         }
-        if( jasonV.get("firstdate") != null) {
+        if (jasonV.get("firstdate") != null) {
             jasonV.put("firstdate", DateUtil.StrToDate(jasonV.get("firstdate").toString()));
         }
-        logger.info("JSON转对象前的创建日期为"+jasonV.get("createdate").toString());
+        logger.info("JSON转对象前的创建日期为" + jasonV.get("createdate").toString());
         Car c = (Car) JSONObject.toBean(jasonV, Car.class);
-        logger.info("JSON转对象后的创建日期为"+c.getCreatedate().toString());
+        logger.info("JSON转对象后的创建日期为" + c.getCreatedate().toString());
         carService.saveCar(c);
     }
 
@@ -79,4 +80,32 @@ public class CarController {
         return carService.getSubBrand(brand);
     }
 
+    @PostMapping(value = "/addBrandInfo")
+    public void addBrandInfo(@RequestParam("brand") String brand,
+                             @RequestParam("set") String set) {
+        carService.addBrandInfo(brand, set);
+    }
+
+    @PostMapping(value = "/getCarinfos")
+    public Carinfo[] getCarinfos(@RequestParam("brand") String brand,
+                                @RequestParam("set") String set) {
+        return carService.getCarinfos(brand, set);
+    }
+
+    @PostMapping(value = "/getCarinfo")
+    public Carinfo getCarinfo(@RequestParam("infoid") Integer infoid) {
+        return carService.getCarinfo(infoid);
+    }
+
+    @PostMapping(value = "/updateCarinfo")
+    public void udpateCarinfo(@RequestParam("infoid") Integer infoid,
+                           @RequestParam("brand") String brand,
+                           @RequestParam("set") String set) {
+        carService.udpateCarinfo(infoid, brand, set);
+    }
+
+    @PostMapping(value = "/delCarinfo")
+    public void delCarinfo(@RequestParam("infoid") Integer infoid) {
+        carService.delCarinfo(infoid);
+    }
 }

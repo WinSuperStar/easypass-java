@@ -29,13 +29,15 @@ public class CustomerService {
     @Autowired
     private CustomerRepository cusRepo;
 
-    public Customer[] getCustomersByMode(String cusmode){return cusRepo.getCustomersByMode(cusmode);}
+    public Customer[] getCustomersByMode(String cusmode) {
+        return cusRepo.getCustomersByMode(cusmode);
+    }
 
     public Customer[] getAllCustomers() {
         return cusRepo.getAllCustomers();
     }
 
-    public Customer getCustomer(Integer cusid){
+    public Customer getCustomer(Integer cusid) {
         return cusRepo.getCustomer(cusid);
     }
 
@@ -45,7 +47,17 @@ public class CustomerService {
     }
 
     @Transactional
+    public void updateCus(Customer cus){
+        Customer cusToUpdate = cusRepo.getOne(cus.getCusid());
+        cus.setCreatedate(cusToUpdate.getCreatedate());
+        cus.setCreator(cusToUpdate.getCreator());
+        cusRepo.save(cus);
+    }
+
+
+    @Transactional
     public void addCus(Customer cus) {
+//        cusRepo.
         cusRepo.save(cus);
     }
     
@@ -54,35 +66,35 @@ public class CustomerService {
 		Pageable pageable = PageRequest.of(currentPageIndex,pageSize,sort);
     	return cusRepo.findAll(pageable);
 	}    */
- 
-    
-    public Page<Customer> queryCusPage(Customer cus,int currentPageIndex, int pageSize) {
-		    Specification<Customer> querySpecifi = new Specification<Customer>() {
-	    	
-			private static final long serialVersionUID = 1L;
-	
-					@Override
-			        public Predicate toPredicate(Root<Customer> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-			
-			            List<Predicate> predicates = new ArrayList<>();
-			            if(StringUtils.isNotBlank(cus.getCusname())){
-			                predicates.add(criteriaBuilder.like(root.get("cusname"), "%"+cus.getCusname()+"%"));
-			            }
-			            if(StringUtils.isNotBlank(cus.getCusmode())){
-			                predicates.add(criteriaBuilder.like(root.get("cusmode"), "%"+cus.getCusmode()+"%"));
-			            }
-			            if(StringUtils.isNotBlank(cus.getContact())){
-			                predicates.add(criteriaBuilder.equal(root.get("contact"), cus.getContact()));
-			            }
-			            if(StringUtils.isNotBlank(cus.getState())){
-			                predicates.add(criteriaBuilder.like(root.get("state"), "%"+cus.getState()+"%"));
-			            }
-			           
-			            return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
-			        }
-	    };
-		Sort sort = new Sort(Sort.Direction.DESC,"cusid");
-		Pageable pageable = PageRequest.of(currentPageIndex,pageSize,sort);
-		return cusRepo.findAll(querySpecifi, pageable);
-   } 
+
+
+    public Page<Customer> queryCusPage(Customer cus, int currentPageIndex, int pageSize) {
+        Specification<Customer> querySpecifi = new Specification<Customer>() {
+
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public Predicate toPredicate(Root<Customer> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+
+                List<Predicate> predicates = new ArrayList<>();
+                if (StringUtils.isNotBlank(cus.getCusname())) {
+                    predicates.add(criteriaBuilder.like(root.get("cusname"), "%" + cus.getCusname() + "%"));
+                }
+                if (StringUtils.isNotBlank(cus.getCusmode())) {
+                    predicates.add(criteriaBuilder.like(root.get("cusmode"), "%" + cus.getCusmode() + "%"));
+                }
+                if (StringUtils.isNotBlank(cus.getContact())) {
+                    predicates.add(criteriaBuilder.equal(root.get("contact"), cus.getContact()));
+                }
+                if (StringUtils.isNotBlank(cus.getState())) {
+                    predicates.add(criteriaBuilder.like(root.get("state"), "%" + cus.getState() + "%"));
+                }
+
+                return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+            }
+        };
+        Sort sort = new Sort(Sort.Direction.DESC, "cusid");
+        Pageable pageable = PageRequest.of(currentPageIndex, pageSize, sort);
+        return cusRepo.findAll(querySpecifi, pageable);
+    }
 }

@@ -35,6 +35,7 @@ public class Itemdetail {
     private String oriSampleCertPath;
     private String oriComments;
     private float oriCost;
+    private String oriCompanyOtherCert;
     private String oriLisenceType;
     private String oriLisenceDesc;
     private float oriLisenceCost;
@@ -53,6 +54,7 @@ public class Itemdetail {
     private String newSampleCertPath;
     private String newComments;
     private float newCost;
+    private String newCompanyOtherCert;
     private String newLisenceType;
     private String newLisenceDesc;
     private float newLisenceCost;
@@ -66,6 +68,22 @@ public class Itemdetail {
     private String add1;
     private String add2;
     private String add3;
+
+    public String getOriCompanyOtherCert() {
+        return oriCompanyOtherCert;
+    }
+
+    public void setOriCompanyOtherCert(String oriCompanyOtherCert) {
+        this.oriCompanyOtherCert = oriCompanyOtherCert;
+    }
+
+    public String getNewCompanyOtherCert() {
+        return newCompanyOtherCert;
+    }
+
+    public void setNewCompanyOtherCert(String newCompanyOtherCert) {
+        this.newCompanyOtherCert = newCompanyOtherCert;
+    }
 
     public Integer getPapid() {
         return papid;
